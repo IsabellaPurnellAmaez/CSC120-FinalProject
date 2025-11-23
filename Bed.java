@@ -19,7 +19,7 @@ public class Bed {
     public void pickUp(){
         if(lifted && clueFound){
             clueFound = true;
-            System.out.println("You found a clue under the covers!");
+            System.out.println("You found a clue under the covers! There's a puzzle piece and a piece of paper with the letters 'TUK'...");
         } else if(!lifted){
             System.out.println("You need to lift the covers first.");
         } else {

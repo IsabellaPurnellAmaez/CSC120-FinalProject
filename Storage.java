@@ -1,15 +1,22 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 abstract class Storage {
     int numOfDrawers;
-    ArrayList<Integer> drawer;
-    boolean isLocked;
+    Map<Integer, List<String>> drawerSpecifics = new HashMap<>(); //key: drawer #, value [locked (T/F), foundMessage]
 
-    public void open(int drawer){
-        if(!isLocked){
-            System.out.println("Drawer " + drawer + " is now open.");
+    public void open(int drawerNum){
+        if(drawerSpecifics.get(drawerNum).get(0) == "T"){
+            System.out.println("Drawer " + drawerNum + " is now open.");
+            System.out.println(drawerSpecifics.get(drawerNum).get(1));
+            //does drawer need to be an object?? hopefully not
         } else {
             System.out.println("Drawer is locked. Needs a key to be open.");
         }
         //needs to add key to if statement to unlock
     }
+
+   
+
 }
