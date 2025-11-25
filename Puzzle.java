@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Puzzle {
-    ArrayList<Integer> pieces;
+    ArrayList<Integer> pieces; //array list of puzzle pieces*** 
 
     public Puzzle(){
         this.pieces = new ArrayList<>();
@@ -10,7 +10,7 @@ public class Puzzle {
         }
 
     }
-    public void placePiece(int pieceNumber){ // have piece number be some sort of variable in main 
+    public void placePiece(int pieceNumber){ // have piece number be some sort of variable in main OR check if piece in pocket instead.***
         if(pieces.contains(pieceNumber)){
             pieces.remove(Integer.valueOf(pieceNumber));
             //have this message say "you have placed *some number* of pieces." then say if the puzzle is done or not. 

@@ -1,25 +1,22 @@
 public class Bed {
     boolean lifted;
-    boolean clueFound;
 
     public Bed(){
         this.lifted = false;
-        this.clueFound = false;
     }
 
     public void liftCovers(){
         if(!lifted){
-            lifted = true;
-            System.out.println("You have lifted the covers."); // add indication of a clue
+            lifted = true; //clueFound = true?
+            System.out.println("You have lifted the covers and found a clue! There's a puzzle piece and a piece of paper with the letters 'TUK'..."); // add indication of a clue
         } else {
             System.out.println("The covers are already lifted.");
         }
     }
 
-    public void pickUp(){
-        if(lifted && clueFound){
-            clueFound = true;
-            System.out.println("You found a clue under the covers! There's a puzzle piece and a piece of paper with the letters 'TUK'...");
+    public void pickUp(){ //pick up the clues*** 
+        if(lifted){
+            System.out.println("You found a clue under the covers!");
         } else if(!lifted){
             System.out.println("You need to lift the covers first.");
         } else {
