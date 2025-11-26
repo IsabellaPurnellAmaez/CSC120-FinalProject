@@ -1,7 +1,7 @@
 public class Cup{
     
-    private String foundMessage = "No found message written";
-    private Boolean foundCup = false;
+    private String foundMessage;
+    private Boolean foundCup;
 
 
     public Cup(String foundMessage){
