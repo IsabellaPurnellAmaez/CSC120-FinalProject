@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 public class Nightstand extends Storage {
     Key key;
 
@@ -20,11 +21,18 @@ public class Nightstand extends Storage {
     }
 
     public void unlock(){
-        if(key.usage == "2nd drawer" || key.usage == "second"){
-            List<String> newList = Arrays.asList("T", "You found another puzzle piece...");
-            drawerSpecifics.put(2, newList);
+        Scanner keyInput = new Scanner(System.in);
+        System.out.println("What key do you want to use?");
+        if(keyInput.equals(key.description)){ 
+            if(key.usage == "2nd drawer" || key.usage == "second"){
+                List<String> newList = Arrays.asList("T", "You found another puzzle piece...");
+                drawerSpecifics.put(2, newList);
+            } else {
+                System.out.println("This key does not unlock the second drawer");
+            }
         } else {
-            System.out.println("This key does not unlock the second drawer");
+            System.out.println("You don't have that key for this drawer.");
         }
+        keyInput.close();
     }
 }

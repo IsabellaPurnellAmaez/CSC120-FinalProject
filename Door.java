@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Door {
     String name;
     boolean isLocked;
@@ -9,11 +10,18 @@ public class Door {
     }
 
     public void unlock(){
-        if(key.usage == this.name){
-            isLocked = false;
-        } else if(key.usage != this.name){
-            isLocked = true;
-            System.out.println("This key does not unlock " + this.name);
+        Scanner keyInput = new Scanner(System.in);
+        System.out.println("What key do you want to use?");
+        if(keyInput.equals(key.description)){ 
+            if(key.usage == this.name){
+                isLocked = false;
+            } else if(key.usage != this.name){
+                isLocked = true;
+                System.out.println("This key does not unlock " + this.name);
+            }
+        } else {
+            System.out.println("You don't have that key for this door.");
         }
+        keyInput.close();
     }
 }
