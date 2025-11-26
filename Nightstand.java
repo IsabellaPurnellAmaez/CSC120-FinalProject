@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 public class Nightstand extends Storage {
+    Key key;
 
     public Nightstand() {
         this.numOfDrawers = 2;
@@ -13,7 +15,16 @@ public class Nightstand extends Storage {
         drawerSpecifics.put(2, (new ArrayList<>())); 
         drawerSpecifics.get(2).addAll(Arrays.asList("F", "You found another puzzle piece..."));
 
-
         //need to write IN MAIN a method for when you can unlock the second drawer using open method from storage
+        //2 drawer after key is used locked is T and message is shown
+    }
+
+    public void unlock(){
+        if(key.usage == "2nd drawer" || key.usage == "second"){
+            List<String> newList = Arrays.asList("T", "You found another puzzle piece...");
+            drawerSpecifics.put(2, newList);
+        } else {
+            System.out.println("This key does not unlock the second drawer");
+        }
     }
 }

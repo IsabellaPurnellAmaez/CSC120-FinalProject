@@ -6,10 +6,10 @@ public class Main {
 
     //private int pieceNumber = ; //number of puzzle pieces found & on the player's person.
 
- public static void main(String[] args){
+   public static void main(String[] args){
    
 
-}
+   }
 
 }
 
