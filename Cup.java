@@ -1,7 +1,7 @@
 public class Cup{
     
     private String foundMessage;
-    private Boolean foundCup;
+    public Boolean foundCup;
 
 
     public Cup(String foundMessage){
@@ -9,9 +9,6 @@ public class Cup{
         this.foundCup = false;
     }
 
-    public Boolean getFoundCup(){
-        return this.foundCup;
-    }
 
     public void pickUp(){
         System.out.println(this.foundMessage);

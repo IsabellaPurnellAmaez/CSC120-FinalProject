@@ -5,7 +5,6 @@ public class Couch {
     public Couch(String liftedMessage){
         this.liftedMessage = liftedMessage;
         this.lifted = false;
-
     }
     
 }
