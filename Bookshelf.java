@@ -14,7 +14,7 @@ public class Bookshelf {//do we need bookshelf or book? does it matter?
         if (!this.foundClue){
             System.out.println(foundBookshelfMessage);
         } else{
-
+            System.out.println("You've already been to the bookshelf, there's no more to see here.");
         }
     }
 

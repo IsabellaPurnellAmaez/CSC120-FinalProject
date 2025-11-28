@@ -4,12 +4,7 @@ public class Table {
 
     public Table(){
         this.checkedUnder = false;
-        this.message = "Under the table is a piece of paper that says: \n abcdefghijklmnopqrstuvwxyz \n nopqrstuvwxyzabcdefghijklm";
-    }
-
- 
-    public Boolean getCheckedUnder(){ //should the attribute be private and just have this method or just let it be public
-        return checkedUnder;
+        this.message = "Under the table is a piece of paper that says: \n abcdefghijklmnopqrstuvwxyz \n nopqrstuvwxyzabcdefghijklm \n \n ybbx haqre gur pbhpu phfuvbaf";
     }
 
     public void readMessage(){
