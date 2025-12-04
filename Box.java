@@ -25,7 +25,7 @@ public class Box {
             }  else{
                 System.out.println("Not quite right, care to try again?"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
                 String endTry = tryLock.nextLine();
-                if (endTry = "no" || endTry = "No"){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
+                if (endTry.contains("no") || endTry.contains("No")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
                     tryLock.close();
                     this.tryToOpen = false;
                     System.out.println("Ok, now what will you do?"); 

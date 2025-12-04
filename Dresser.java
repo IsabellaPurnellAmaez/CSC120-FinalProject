@@ -18,6 +18,5 @@ public class Dresser extends Storage {
         drawerSpecifics.get(3).addAll(Arrays.asList("T", "You found a puzzle piece..."));
     
         
-        //need to figure out how to speficy which drawer is locked
     }
 }

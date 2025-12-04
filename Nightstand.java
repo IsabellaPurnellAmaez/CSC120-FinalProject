@@ -20,17 +20,15 @@ public class Nightstand extends Storage {
         //2 drawer after key is used locked is T and message is shown
     }
 
-    public void unlock(){
+    public void unlock(){ //take string from scanner in main
         Scanner scanner = new Scanner(System.in);
         String keyInput = scanner.nextLine();
         System.out.println("What key do you want to use?");
         if(keyInput.equals(key.description)){ 
-            if(key.usage == "2nd drawer" || key.usage == "second"){
-                List<String> newList = Arrays.asList("T", "You found another puzzle piece...");
-                drawerSpecifics.put(2, newList);
-            } else {
-                System.out.println("This key does not unlock the second drawer");
-            }
+        List<String> newList = Arrays.asList("T", "You found another puzzle piece...");
+        drawerSpecifics.put(2, newList);
+        } else if(!keyInput.equals(key.description)){
+            System.out.println("This key does not unlock the second drawer");
         } else {
             System.out.println("You don't have that key for this drawer.");
         }
