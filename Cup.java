@@ -1,7 +1,7 @@
 public class Cup{
     
-    private String foundMessage = "No found message written";
-    private Boolean foundCup = false;
+    private String foundMessage;
+    public Boolean foundCup;
 
 
     public Cup(String foundMessage){
@@ -9,19 +9,11 @@ public class Cup{
         this.foundCup = false;
     }
 
-    public Boolean getFoundCup(){
-        return this.foundCup;
-    }
 
     public void pickUp(){
         System.out.println(this.foundMessage);
         this.foundCup = true;
     }
-
-
-public static void main(String[] args){
-    
-}
 
 
 }

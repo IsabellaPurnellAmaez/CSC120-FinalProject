@@ -1,6 +1,6 @@
 public class PuzzlePiece {
     private String foundMessage = "No found message written"; //do we need a message for finding puzzle pieces?
-    private Boolean foundPiece = false;
+    public Boolean foundPiece = false;
 
 
     public PuzzlePiece(String foundMessage){
