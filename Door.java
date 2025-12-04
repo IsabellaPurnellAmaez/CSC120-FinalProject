@@ -10,7 +10,8 @@ public class Door {
     }
 
     public void unlock(){
-        Scanner keyInput = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String keyInput = scanner.nextLine();
         System.out.println("What key do you want to use?");
         if(keyInput.equals(key.description)){ 
             if(key.usage == this.name){
@@ -22,6 +23,6 @@ public class Door {
         } else {
             System.out.println("You don't have that key for this door.");
         }
-        keyInput.close();
+        scanner.close();
     }
 }

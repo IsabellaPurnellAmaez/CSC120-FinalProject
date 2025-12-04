@@ -21,7 +21,8 @@ public class Nightstand extends Storage {
     }
 
     public void unlock(){
-        Scanner keyInput = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String keyInput = scanner.nextLine();
         System.out.println("What key do you want to use?");
         if(keyInput.equals(key.description)){ 
             if(key.usage == "2nd drawer" || key.usage == "second"){
@@ -33,6 +34,6 @@ public class Nightstand extends Storage {
         } else {
             System.out.println("You don't have that key for this drawer.");
         }
-        keyInput.close();
+        scanner.close();
     }
 }

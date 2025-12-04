@@ -19,7 +19,7 @@ public class Bed {
             System.out.println("You found a clue under the covers!");
         } else if(!lifted){
             System.out.println("You need to lift the covers first.");
-        } else {
+        } else {//no third option add clueFound back?
             System.out.println("You have already found the clue under the covers.");
         }
     }
