@@ -59,13 +59,70 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //table interaction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         //-----------
+
+
+
+
+
+
+
+
+
+
          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         //-----------
       } while (stillPlaying);
 
 
       if(inLivingRoom == false && inBedroom == false){
          stillPlaying = false;
-         System.out.println("Congrats! You've escaped the room!");
+         System.out.println("Congrats! You've haved escaped the room!");
          playGame.close();
       }
    }
