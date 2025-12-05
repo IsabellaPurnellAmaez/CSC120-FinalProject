@@ -47,41 +47,39 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } 
 
          //bookshelf interaction
-         if(inLivingRoom == true && inputLine.contains("booksheld") && inputLine.contains("approach") || inputLine.contains("look at")){
+         if(inLivingRoom == true && inputLine.contains("bookshelf") && inputLine.contains("approach") || inputLine.contains("look at")){
             livingRoom.bookshelf.approachBookshelf();
-            //add print statement saying smthn abt book
             if(inputLine.contains("book") && inputLine.contains("pick up") || inputLine.contains("look at")){
                livingRoom.bookshelf.pickUpBook();
                //add print statement for clue
             }
-         } else if (inLivingRoom == false && inputLine.contains("booksheld") && inputLine.contains("approach") || inputLine.contains("look at")){
+         } else if (inLivingRoom == false && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a bookshelf here.");
          }
-
+         //FIGURE OUT HOW TO GO BACK TO BOOKSHELF AFTER CHECKING TABLE
          //table interaction
+         if(inLivingRoom == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            livingRoom.table.readMessage();
+         } else if (inLivingRoom == false && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("You can't see a table here.");
+         }
 
+         //couch interaction
+         if(inLivingRoom == true && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            livingRoom.couch.pickUpCushions();
+         } else if (inLivingRoom == false && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("You can't see a couch here.");
+         }
 
+         //box interaction
+         if(inLivingRoom == true && livingRoom.couch.lifted == true &&inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            livingRoom.box.pickUp();
+         } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("You can't see a box here.");
+         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+         //key and bedroom door interaction
+         
 
 
 
@@ -99,6 +97,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
 
          
+
+
 
 
 
