@@ -8,8 +8,9 @@ public class Table {
     }
 
     public void readMessage(){
-        if(checkedUnder){
+        if(checkedUnder == false){
             System.out.println(message);
+            checkedUnder = true;
         }else{
             System.out.println("Something about this table does look odd but you can't quite figure out what. Maybe keep looking around.");
         }
