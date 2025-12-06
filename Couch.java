@@ -10,7 +10,7 @@ public class Couch {
     public void pickUpCushions(){
         if(!this.lifted){
             System.out.println(this.liftedMessage);
-        this.lifted = true;
+            this.lifted = true;
         } else{
             System.out.println("You've already checked under the cushions.");
         }
