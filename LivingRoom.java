@@ -20,6 +20,7 @@ public class LivingRoom {
         this.bookshelf = new Bookshelf();
         this.table = new Table();
         this.couch = new Couch();
+        this.box = new Box();
         
 
         this.outsideDoor = new Door("Outside door");

@@ -15,7 +15,7 @@ public class Box {
     }
 
     public void openBox(){
-        this.tryToOpen = true;
+        this.tryToOpen = false;
         Scanner tryLock = new Scanner(System.in);
         while(this.tryToOpen){
             String codeTry = tryLock.nextLine(); //I think this method probably has bugs with the scanner and I doubt it works right now, need to do more testing. 

@@ -8,7 +8,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    
    public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
       if(livingRoom.redCup.foundCup){ 
-         livingRoom.bookshelf.foundClue = true;
+         livingRoom.bookshelf.foundBook = true;
       }
       livingRoom.bookshelf.approachBookshelf();
    }
@@ -24,6 +24,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       
       do{
          inputLine = playGame.nextLine();
+         System.out.println(inLivingRoom);
          //cups interaction
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             if(inputLine.contains("red")){ 
@@ -73,7 +74,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //box interaction
          if(inLivingRoom == true && livingRoom.couch.lifted == true &&inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            livingRoom.box.pickUp();
+            livingRoom.box.openBox();
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
@@ -87,7 +88,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             } else {
                System.out.println("You don't have a key that fits that door.");
             }
-         } else if (inLivingRoom == false){
+         } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
 
