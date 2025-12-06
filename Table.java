@@ -4,7 +4,7 @@ public class Table {
 
     public Table(){
         this.checkedUnder = false;
-        this.message = "Under the table is a piece of paper that says: \n abcdefghijklmnopqrstuvwxyz \n nopqrstuvwxyzabcdefghijklm \n \n ybbx haqre gur pbhpu phfuvbaf";
+        this.message = "You find a piece of paper that seems to be a cipher for the unreadable page in the book.";
     }
 
     public void readMessage(){
