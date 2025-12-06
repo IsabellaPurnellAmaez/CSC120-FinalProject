@@ -96,12 +96,18 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //-----------
 
+         //nightstand interaction
+         if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("You approach the nightstand. It has two drawers.");
+            if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
+               bedroom.nightstand.open(1);
+            } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
+               bedroom.nightstand.open(2);
+         } else if (inBedroom == false && inputLine.contains("nightstand")){
+            System.out.println("There is no nightstand in this room.");
+         }
 
-
-
-
-
-
+      }
 
 
 
@@ -166,13 +172,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //-----------
       } while (stillPlaying);
 
-
+      
       if(inLivingRoom == false && inBedroom == false){
          stillPlaying = false;
-         System.out.println("Congrats! You've haved escaped the room!");
+         System.out.println("Congrats! You've have escaped the room!");
          playGame.close();
       }
-   }
+   } 
+
 
 }
 
