@@ -42,26 +42,26 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                   livingRoom.greenCup.pickUp();
                }
             }
-         } else if (inLivingRoom == false && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){
-            System.out.println("You can't see any cups here.");
+         } else if (inLivingRoom == false && inputLine.contains("cup")){
+            System.out.println("There are no cups in this room.");
          } 
 
          //bookshelf interaction
-         if(inLivingRoom == true && inputLine.contains("bookshelf") && inputLine.contains("approach") || inputLine.contains("look at")){
+         if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && inputLine.contains("approach") || inputLine.contains("look at")){
             livingRoom.bookshelf.approachBookshelf();
             if(inputLine.contains("book") && inputLine.contains("pick up") || inputLine.contains("look at")){
                livingRoom.bookshelf.pickUpBook();
                //add print statement for clue
             }
-         } else if (inLivingRoom == false && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            System.out.println("You can't see a bookshelf here.");
+         } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
+            System.out.println("There is no bookshelf in this room.");
          }
-         //FIGURE OUT HOW TO GO BACK TO BOOKSHELF AFTER CHECKING TABLE
+         
          //table interaction
-         if(inLivingRoom == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true &&inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             livingRoom.table.readMessage();
-         } else if (inLivingRoom == false && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            System.out.println("You can't see a table here.");
+         } else if (inLivingRoom == false && inputLine.contains("table")){
+            System.out.println("There is no table in this room.");
          }
 
          //couch interaction
