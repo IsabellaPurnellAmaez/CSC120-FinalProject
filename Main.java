@@ -56,7 +56,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             livingRoom.bookshelf.approachBookshelf();
             if(inputLine.contains("book") && inputLine.contains("pick up") || inputLine.contains("look at")){
                livingRoom.bookshelf.pickUpBook();
-               //add print statement for clue
             }
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
             System.out.println("There is no bookshelf in this room.");
@@ -77,7 +76,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //box interaction
-         if(inLivingRoom == true && livingRoom.couch.lifted == true &&inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+         if(inLivingRoom == true && livingRoom.couch.lifted == true && livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
             livingRoom.box.openBox();
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
