@@ -107,8 +107,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inBedroom == false && inputLine.contains("nightstand")){
             System.out.println("There is no nightstand in this room.");
          }
+         }
 
-      }
+         
+
 
 
 
