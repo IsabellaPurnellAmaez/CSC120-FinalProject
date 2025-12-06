@@ -23,6 +23,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       String inputLine = "";
       
       do{
+         System.out.println("");
          inputLine = playGame.nextLine();
          System.out.println(inLivingRoom);
          //cups interaction
@@ -33,14 +34,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                livingRoom.blueCup.pickUp();
             } else if(inputLine.contains("green")){
                livingRoom.greenCup.pickUp();
-            } else if (!inputLine.contains("red") && !inputLine.contains("blue") && !inputLine.contains("green")){
+            } else{
                System.out.println("What color cup do you want to pick up? red, blue, or green?");
-               if(inputLine.contains("red")){ 
+               String colorChoice = playGame.nextLine();
+               if(colorChoice.contains("red")){ 
                   livingRoom.redCup.pickUp();
-               } else if(inputLine.contains("blue")){
-                  System.out.println("hello");
+               } else if(colorChoice.contains("blue")){
                   livingRoom.blueCup.pickUp();
-               } else if(inputLine.contains("green")){
+               } else if(colorChoice.contains("green")){
                   livingRoom.greenCup.pickUp();
                }
             }
@@ -93,7 +94,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("The door has already been unlocked.");
          }
 */
-
          //-----------
 
 
