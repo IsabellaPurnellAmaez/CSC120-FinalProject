@@ -18,13 +18,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
    
-      System.out.println("You are locked inside a room. The room has two doors, the one you entered through and another that you don't know where it leads. Both are locked. Inside the room with you is a table with three different colored cups, a bookshelf, and a couch.");
+      System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a bookshelf, and a couch.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
       
       do{
          System.out.println("");
          inputLine = playGame.nextLine();
+         System.out.println("");
          System.out.println(inLivingRoom);
          //cups interaction
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
@@ -35,8 +36,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             } else if(inputLine.contains("green")){
                livingRoom.greenCup.pickUp();
             } else{
-               System.out.println("What color cup do you want to pick up? red, blue, or green?");
+               System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
                String colorChoice = playGame.nextLine();
+               System.out.println("");
                if(colorChoice.contains("red")){ 
                   livingRoom.redCup.pickUp();
                } else if(colorChoice.contains("blue")){
