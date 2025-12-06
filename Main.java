@@ -33,11 +33,12 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                livingRoom.blueCup.pickUp();
             } else if(inputLine.contains("green")){
                livingRoom.greenCup.pickUp();
-            } else {
+            } else if (!inputLine.contains("red") && !inputLine.contains("blue") && !inputLine.contains("green")){
                System.out.println("What color cup do you want to pick up? red, blue, or green?");
                if(inputLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
                } else if(inputLine.contains("blue")){
+                  System.out.println("hello");
                   livingRoom.blueCup.pickUp();
                } else if(inputLine.contains("green")){
                   livingRoom.greenCup.pickUp();
@@ -78,7 +79,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
-
+/*
          //key and bedroom door interaction
          if(inLivingRoom = true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
             if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
@@ -91,7 +92,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
-
+*/
 
          //-----------
 
