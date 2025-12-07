@@ -93,6 +93,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             } else {
                System.out.println("You don't have a key that fits that door.");
             }
+         } else if (inLivingRoom == true && inputLine.contains("key") && !inputLine.contains(livingRoom.bedroomDoorKey.description)){
+            System.out.println("What door do you want to open? Bedroom or outside.");
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
