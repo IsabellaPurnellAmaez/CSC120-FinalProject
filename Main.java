@@ -57,6 +57,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             if(inputLine.contains("book") && inputLine.contains("pick up") || inputLine.contains("look at")){
                livingRoom.bookshelf.pickUpBook();
             }
+         } else if(inLivingRoom == true && inputLine.contains("book") && inputLine.contains("use")){
+            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1");
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
             System.out.println("There is no bookshelf in this room.");
          }
