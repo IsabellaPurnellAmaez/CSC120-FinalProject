@@ -64,7 +64,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //table interaction
-         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true &&inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             livingRoom.table.readMessage();
          } else if (inLivingRoom == false && inputLine.contains("table")){
             System.out.println("There is no table in this room.");
@@ -83,7 +83,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
-/*
+
          //key and bedroom door interaction
          if(inLivingRoom = true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
             if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
@@ -98,7 +98,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
-*/
          //-----------
 
          //nightstand interaction
