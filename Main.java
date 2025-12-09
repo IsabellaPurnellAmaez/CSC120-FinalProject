@@ -26,7 +26,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          System.out.println("");
          inputLine = playGame.nextLine();
          System.out.println("");
-         System.out.println(inLivingRoom);
+         //System.out.println(inLivingRoom);
          //cups interaction
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             if(inputLine.contains("red")){ 
@@ -110,6 +110,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no nightstand in this room.");
          }
          }
+
+
+
+
 
          
 
