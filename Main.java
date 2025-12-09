@@ -101,7 +101,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //-----------
 
          //nightstand interaction
-         if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+         if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at")|| inputLine.contains("go to"))){
             System.out.println("You approach the nightstand. It has two drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.nightstand.open(1);
@@ -111,6 +111,40 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no nightstand in this room.");
          }
          }
+
+         //dresser interaction
+
+         if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("You approach the dresser. It has three drawers.");
+            if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
+               bedroom.dresser.open(1);
+            } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("middle")){
+               bedroom.dresser.open(2);
+            }
+            else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
+               bedroom.dresser.open(3);
+            }
+         } else if (inBedroom == false && inputLine.contains("dresser")){
+            System.out.println("There is no dresser in this room.");
+         }
+
+
+
+
+
+
+         if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what"))){
+            if(inLivingRoom == true){
+               System.out.println("You are currently in the living room.");
+            } else if (inBedroom == true){
+               System.out.println("You are currently in the bedroom.");
+            }
+            else{
+               System.out.println("You are not in a room. You've escaped!");
+            }
+         }
+
+
 
 
 
