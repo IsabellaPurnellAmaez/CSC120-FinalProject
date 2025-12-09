@@ -87,7 +87,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //key and bedroom door interaction
          if(inLivingRoom = true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
             if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
-               System.out.println("You've now unlocked the bedroom door. You are now in the bedroom?");
+               System.out.println("You've now unlocked the bedroom door. You are now in the bedroom.");
                inLivingRoom = false;
                inBedroom = true;
             } else {
@@ -128,12 +128,25 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no dresser in this room.");
          }
 
+         //bed interaction
+
+         if(inBedroom == true && inputLine.contains("bed") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
+            System.out.println("You approach the bed.");
+            if((inputLine.contains("lift") || inputLine.contains("pick up")) && (inputLine.contains("covers") || inputLine.contains("blanket") || inputLine.contains("sheets"))){
+               bedroom.bed.liftCovers();
+            } else if(inputLine.contains("pick up") || inputLine.contains("look at")){
+               bedroom.bed.pickUp();
+            }
+         } else if (inBedroom == false && inputLine.contains("bed")){
+            System.out.println("There is no bed in this room.");
+         }
 
 
 
 
 
-         if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what"))){
+
+         if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what")) || inputLine.contains("where am i")){
             if(inLivingRoom == true){
                System.out.println("You are currently in the living room.");
             } else if (inBedroom == true){
