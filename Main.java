@@ -27,25 +27,27 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          inputLine = playGame.nextLine();
          System.out.println("");
          System.out.println(inLivingRoom);
-         System.out.println(inLivingRoom);
-         //cups interaction
-         if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
-            if(inputLine.contains("red")){ 
-               livingRoom.redCup.pickUp();
-            } else if(inputLine.contains("blue")){
-               livingRoom.blueCup.pickUp();
-            } else if(inputLine.contains("green")){
-               livingRoom.greenCup.pickUp();
-            } else{
-               System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
-               String colorChoice = playGame.nextLine();
-               System.out.println("");
-               if(colorChoice.contains("red")){ 
+        //cups interaction
+         if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
+            System.out.println("You approach the cups. There is a red cup, a blue cup, and a green cup. \n");   
+            if(inputLine.contains("lift") || inputLine.contains("pick up")){
+               if(inputLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
-               } else if(colorChoice.contains("blue")){
+               } else if(inputLine.contains("blue")){
                   livingRoom.blueCup.pickUp();
-               } else if(colorChoice.contains("green")){
+               } else if(inputLine.contains("green")){
                   livingRoom.greenCup.pickUp();
+               } else{
+                  System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
+                  String colorChoice = playGame.nextLine();
+                  System.out.println("");
+                  if(colorChoice.contains("red")){ 
+                     livingRoom.redCup.pickUp();
+                  } else if(colorChoice.contains("blue")){
+                     livingRoom.blueCup.pickUp();
+                  } else if(colorChoice.contains("green")){
+                     livingRoom.greenCup.pickUp();
+                  }
                }
             }
          } else if (inLivingRoom == false && inputLine.contains("cup")){
@@ -53,9 +55,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } 
 
          //bookshelf interaction
-         if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && inputLine.contains("approach") || inputLine.contains("look at")){
+         if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             livingRoom.bookshelf.approachBookshelf();
-            if(inputLine.contains("book") && inputLine.contains("pick up") || inputLine.contains("look at")){
+            if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
                livingRoom.bookshelf.pickUpBook();
             }
          } else if(inLivingRoom == true && inputLine.contains("book") && inputLine.contains("use")){
@@ -63,16 +65,17 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
             System.out.println("There is no bookshelf in this room.");
          }
+         //there may be bugs here. said we had already been to bookshelf and then printed the book message again...
 
          //table interaction
-         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            livingRoom.table.readMessage();
+         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
+            livingRoom.table.readMessage(); // put in a use cipher method later******
          } else if (inLivingRoom == false && inputLine.contains("table")){
             System.out.println("There is no table in this room.");
          }
 
          //couch interaction
-         if(inLivingRoom == true && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+         if(inLivingRoom == true && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             livingRoom.couch.pickUpCushions();
          } else if (inLivingRoom == false && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a couch here.");
@@ -80,13 +83,13 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //box interaction
          if(inLivingRoom == true && livingRoom.couch.lifted == true && livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
-            livingRoom.box.openBox();
+            livingRoom.box.openBox(); //need to fix scanner issues here, need to take out scanner in box and get this to still work  
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
 
          //key and bedroom door interaction
-         if(inLivingRoom = true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
+         if(inLivingRoom == true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
             if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
                System.out.println("You've now unlocked the bedroom door. You are now in the bedroom?");
                inLivingRoom = false;
@@ -245,7 +248,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          System.out.println("Congrats! You've have escaped the room!");
          playGame.close();
       }
-   } 
-
+   }
 
 }

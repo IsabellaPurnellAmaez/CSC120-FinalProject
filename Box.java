@@ -14,11 +14,11 @@ public class Box {
 
     }
 
-    public void openBox(){
+    public void openBox(){ // we need to take out the scanner and make this still work. 
         this.tryToOpen = false;
         Scanner tryLock = new Scanner(System.in);
         while(this.tryToOpen){
-            String codeTry = tryLock.nextLine(); //I think this method probably has bugs with the scanner and I doubt it works right now, need to do more testing. 
+            String codeTry = tryLock.nextLine(); 
             if(codeTry == this.boxCode){
                 System.out.println("You've opened the box! Inside is a key.");
                 this.open = true;
