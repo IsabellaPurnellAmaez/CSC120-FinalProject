@@ -27,6 +27,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          inputLine = playGame.nextLine();
          System.out.println("");
          System.out.println(inLivingRoom);
+         System.out.println(inLivingRoom);
          //cups interaction
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("lift") || inputLine.contains("pick up"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             if(inputLine.contains("red")){ 
@@ -87,7 +88,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //key and bedroom door interaction
          if(inLivingRoom = true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
             if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
-               System.out.println("You've now unlocked the bedroom door. You are now in the bedroom.");
+               System.out.println("You've now unlocked the bedroom door. You are now in the bedroom?");
                inLivingRoom = false;
                inBedroom = true;
             } else {
@@ -101,7 +102,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //-----------
 
          //nightstand interaction
-         if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at")|| inputLine.contains("go to"))){
+         if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You approach the nightstand. It has two drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.nightstand.open(1);
@@ -111,6 +112,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }else if (inBedroom == false && inputLine.contains("nightstand")){
             System.out.println("There is no nightstand in this room.");
          }
+         
 
          //dresser interaction
 
@@ -155,7 +157,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //room location check
 
          if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what")) || inputLine.contains("where am i")){
-            if(inLivingRoom == true){
+                     if(inLivingRoom == true){
                System.out.println("You are currently in the living room.");
             } else if (inBedroom == true){
                System.out.println("You are currently in the bedroom.");
@@ -247,5 +249,3 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
 
 }
-
-
