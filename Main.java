@@ -6,12 +6,12 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
    
-   public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
-      if(livingRoom.redCup.foundCup){ 
-         livingRoom.bookshelf.foundBook = true;
-      }
-      livingRoom.bookshelf.approachBookshelf();
-   }
+   //public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
+      //if(livingRoom.redCup.foundCup){ 
+         //livingRoom.bookshelf.foundBook = true;
+      //}
+      //livingRoom.bookshelf.approachBookshelf();
+   //}
 
     public static void main (String[] args){ //idk what this duplicate modifier error means. Is it bc the object is named Main as well? 
       Boolean inLivingRoom = true;
@@ -27,15 +27,18 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          inputLine = playGame.nextLine();
          System.out.println("");
          System.out.println(inLivingRoom);
-        //cups interaction
+        //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             System.out.println("You approach the cups. There is a red cup, a blue cup, and a green cup. \n");   
-            if(inputLine.contains("lift") || inputLine.contains("pick up")){
-               if(inputLine.contains("red")){ 
+            System.out.println("Which cup would you like to pick up?");
+            String nextLine = playGame.nextLine();
+            System.out.println("");
+            if(nextLine.contains("lift") || nextLine.contains("pick up")){
+               if(nextLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
-               } else if(inputLine.contains("blue")){
+               } else if(nextLine.contains("blue")){
                   livingRoom.blueCup.pickUp();
-               } else if(inputLine.contains("green")){
+               } else if(nextLine.contains("green")){
                   livingRoom.greenCup.pickUp();
                } else{
                   System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
@@ -57,7 +60,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //bookshelf interaction
          if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             livingRoom.bookshelf.approachBookshelf();
-            if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
+            String nextLine = playGame.nextLine();
+            System.out.println("");
+            if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
                livingRoom.bookshelf.pickUpBook();
             }
          } else if(inLivingRoom == true && inputLine.contains("book") && inputLine.contains("use")){
@@ -102,6 +107,22 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
          //-----------
 
          //nightstand interaction
