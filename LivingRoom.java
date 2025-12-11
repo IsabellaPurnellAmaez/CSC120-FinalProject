@@ -1,16 +1,16 @@
 public class LivingRoom {
-    public Cup redCup; 
-    public Cup blueCup; 
-    public Cup greenCup; 
+    private Cup redCup; 
+    private Cup blueCup; 
+    private Cup greenCup; 
 
     public Bookshelf bookshelf;
     public Table table;
     public Couch couch;
     public Box box;
 
-    public Door outsideDoor;
-    public Door bedroomDoor;
-    public Key bedroomDoorKey;
+    private Door outsideDoor;
+    private Door bedroomDoor;
+    private Key bedroomDoorKey;
 
     public String roomMessage;
 
@@ -32,5 +32,41 @@ public class LivingRoom {
         this.roomMessage = "Inside the living room is a table with three cups on it, a couch, and a bookshelf. There are two doors, the one you came through and a door leading to another room.";
     }
     
+    public Cup getRedCup(){
+        return redCup;
+    }
+    public Cup getBlueCup(){
+        return blueCup;
+    }
+    public Cup getGreenCup(){
+        return greenCup;
+    }
 
+    public Bookshelf getBookshelf(){
+        return bookshelf;
+    }
+    public Table getTable(){
+        return table;
+    }
+    public Couch getCouch(){
+        return couch;
+    }
+    public Box getBox(){
+        return box;
+    }
+
+    public Door getOutsideDoor(){
+        return outsideDoor;
+    }
+    public Door getBedroomDoor(){
+        return bedroomDoor;
+    }
+    public Key getBedroomDoorKey(){
+        return bedroomDoorKey;
+    }
+
+    public String getRoomMessage(){
+        return roomMessage;
+    }
+    
 }
