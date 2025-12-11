@@ -1,3 +1,5 @@
+import java.util.NavigableMap;
+
 public class Bedroom {
     public Key outsideDoorKey;
 
@@ -30,5 +32,40 @@ public class Bedroom {
         this.mirror = new Mirror();
 
         this.roomMessage = "You're in a bedroom with a bed, nightstand, and a dresser with a puzzle on it. There is one door leading to the livingroom.";
+    }
+
+    public Key getOutsideDoorKey(){
+        return outsideDoorKey;
+    }
+
+    public Nightstand getNightstand(){
+        return nightstand;
+    }
+    public Dresser getDresser(){
+        return dresser;
+    }
+    public Bed getBed(){
+        return bed;
+    }
+    public Puzzle getPuzzle(){
+        return puzzle;
+    }
+
+    public PuzzlePiece getPuzzlePiece1(){
+        return puzzlePiece1;
+    }
+    public PuzzlePiece getPuzzlePiece2(){
+        return puzzlePiece2;
+    }
+    public PuzzlePiece getPuzzlePiece3(){
+        return puzzlePiece3;
+    }  
+
+    public Mirror getMirror(){
+        return mirror;
+    }
+
+    public String getRoomMessage(){
+        return roomMessage;
     }
 }

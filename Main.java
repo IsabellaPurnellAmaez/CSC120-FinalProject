@@ -10,6 +10,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private ArrayList<Object> inventory = new ArrayList<Object>();
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
+   private String commandMessage = "POSSIBLE COMMANDS:\n________________\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - where am I / which room am I in\n________________\n";
 
    private void inInventory(String item){
       inventory.add(item);
@@ -26,6 +27,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
    
+      System.out.println(gameMain.commandMessage);
       System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
@@ -34,8 +36,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          System.out.println("");
          inputLine = playGame.nextLine().toLowerCase();
          System.out.println("");
-         //System.out.println(inLivingRoom);
-         //System.out.println(inBedroom);
 
 
         //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
