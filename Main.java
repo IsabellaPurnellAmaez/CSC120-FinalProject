@@ -102,6 +102,27 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
          //-----------
 
          //nightstand interaction
@@ -145,7 +166,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }  
          } else if (inBedroom == false && inputLine.contains("bed")){
             System.out.println("There is no bed in this room.");
-         }
+         } //theres probably a parenthesis issue here *******
 
          //
 
