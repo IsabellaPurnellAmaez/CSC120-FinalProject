@@ -7,7 +7,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
 
-   private ArrayList<Object> inventory = new ArrayList<Object>();
+   private ArrayList<String> inventory = new ArrayList<String>();
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
    private String commandMessage = "POSSIBLE COMMANDS:\n________________\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - where am I / which room am I in\n________________\n";
@@ -16,11 +16,15 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       inventory.add(item);
    }
 
+   public ArrayList<String> getInventory(){
+      return this.inventory;
+   }
+
    //private void removeInventory(String item){
     //  inventory.remove(item);
    //}
 
-    public static void main (String[] args){
+   public static void main (String[] args){
       Main gameMain = new Main();
 
       Boolean inLivingRoom = true;
@@ -301,6 +305,20 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                System.out.println("You've escaped the house!");
             }
          }
+
+         //print inventory
+         if(inputLine.contains("print inventory")){
+            System.out.println("****************************");
+            System.out.println("INVENTORY:");
+            System.out.println("****************************");
+
+            for(int i = 1; i <= gameMain.getInventory().size(); i++){
+            System.out.println(gameMain.getInventory().get(i));
+            System.out.println("****************************");
+         }
+         }
+
+         
 
       } while (stillPlaying);
 
