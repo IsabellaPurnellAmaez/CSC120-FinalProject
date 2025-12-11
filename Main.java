@@ -6,9 +6,21 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
+<<<<<<< HEAD
+=======
    static ArrayList<Object> objectsInPossession = new ArrayList<Object>();
    
+<<<<<<< HEAD
  
+=======
+   //public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
+      //if(livingRoom.redCup.foundCup){ 
+         //livingRoom.bookshelf.foundBook = true;
+      //}
+      //livingRoom.bookshelf.approachBookshelf();
+   //}
+>>>>>>> refs/remotes/origin/main
+>>>>>>> f083a0f9e829e76aef10d71e2447e0820cd439c8
 
    private void holding(String item){
       objectsInPossession.add(item);
@@ -34,13 +46,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          inputLine = playGame.nextLine();
          System.out.println("");
          System.out.println(inLivingRoom);
+         System.out.println(inBedroom);
         //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup
          if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             System.out.println("You approach the cups. There is a red cup, a blue cup, and a green cup. \n");   
             System.out.println("Which cup would you like to pick up?");
             String nextLine = playGame.nextLine();
             System.out.println("");
-            if(nextLine.contains("lift") || nextLine.contains("pick up")){
+            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("red") || nextLine.contains("blue") || nextLine.contains("green")){
                if(nextLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
                   gameMain.holding("red cup note");
@@ -75,7 +88,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             livingRoom.bookshelf.approachBookshelf();
             String nextLine = playGame.nextLine();
-            System.out.println("");
+            System.out.println("\n");
             if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
                livingRoom.bookshelf.pickUpBook();
             }
@@ -84,7 +97,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
             System.out.println("There is no bookshelf in this room.");
          }
-         //there may be bugs here. said we had already been to bookshelf and then printed the book message again...
 
          //table interaction
          if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
@@ -102,25 +114,62 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //box interaction
          if(inLivingRoom == true && livingRoom.couch.lifted == true && livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
-            livingRoom.box.openBox(); //need to fix scanner issues here, need to take out scanner in box and get this to still work  
+            livingRoom.box.tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
+            while(livingRoom.box.tryToOpen){ 
+               System.out.println("Enter the 4 digit code to open the box:");
+               String codeTry = playGame.nextLine();
+               if(codeTry.equals(livingRoom.box.boxCode)){
+                     System.out.println("You've opened the box! Inside is a key.");
+                     livingRoom.box.tryToOpen = false;
+                     livingRoom.box.open = true;
+               }  else{
+                     System.out.println("Not quite right, care to try again?"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
+                     String endTry = playGame.nextLine().trim();
+                     if (endTry.contains("no") || endTry.contains("No")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
+                        livingRoom.box.tryToOpen = false;
+                        livingRoom.box.open = true;
+                        System.out.println("Ok, now what will you do?"); 
+                     } else if (endTry.contains(livingRoom.box.boxCode)){
+                        System.out.println("You've opened the box! Inside is a key.");
+                        livingRoom.box.open = true;
+                        livingRoom.box.tryToOpen = false;
+                     }
+               }
+            }
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
 
          //key and bedroom door interaction
-         if(inLivingRoom == true && livingRoom.box.open == true && inputLine.contains("key") && (inputLine.contains("unlock") || inputLine.contains("use"))){
-            if(inputLine.contains(livingRoom.bedroomDoorKey.description)){
-               System.out.println("You've now unlocked the bedroom door. You are now in the bedroom?");
+         if(inLivingRoom == true && livingRoom.box.open == true && inputLine.contains("key") && inputLine.contains("bedroom") &&(inputLine.contains("unlock") || inputLine.contains("use"))){
+            System.out.println("What key do you want to use? Bedroom or outside?");
+            String keyInput = playGame.nextLine();
+            if(keyInput.equals(livingRoom.bedroomDoorKey.description)){ 
+                  if(livingRoom.bedroomDoorKey.usage.equals(livingRoom.bedroomDoor.name)){
+                     livingRoom.bedroomDoor.isLocked = false;
+                  } else {
+                     livingRoom.bedroomDoor.isLocked = true;
+                     System.out.println("This key does not unlock " + livingRoom.bedroomDoor.name);
+                  }
+            } else {
+                  System.out.println("You don't have that key for this door.");
+            }
+         } else if (inLivingRoom == true && inputLine.contains("key")){
+            System.out.println("What door do you want to open? Bedroom or outside.");
+            String doorChoice = playGame.nextLine();
+            System.out.println("");
+            if (doorChoice.contains("bedroom")){
                inLivingRoom = false;
                inBedroom = true;
+               System.out.println("You have now entered the bedroom.");
             } else {
-               System.out.println("You don't have a key that fits that door.");
+               System.out.println("You don't have the key to this the door yet.");
             }
-         } else if (inLivingRoom == true && inputLine.contains("key") && !inputLine.contains(livingRoom.bedroomDoorKey.description)){
-            System.out.println("What door do you want to open? Bedroom or outside.");
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
+<<<<<<< HEAD
+=======
 
 
 
@@ -142,6 +191,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
 
          
+>>>>>>> refs/remotes/origin/main
          //-----------
 
          //nightstand interaction
