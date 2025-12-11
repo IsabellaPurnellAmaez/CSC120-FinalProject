@@ -34,8 +34,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          System.out.println("");
          inputLine = playGame.nextLine().toLowerCase();
          System.out.println("");
-         System.out.println(inLivingRoom);
-         System.out.println(inBedroom);
+         //System.out.println(inLivingRoom);
+         //System.out.println(inBedroom);
 
 
         //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
@@ -49,13 +49,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }else if (inLivingRoom == false && inputLine.contains("cup")){
             System.out.println("There are no cups in this room.");
          }
+         
          //interact with cups 
          if(gameMain.location == "cups"){ 
             String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
             if(nextLine.contains("cups") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){
                System.out.println("You're already at the cups");
             }
-            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("look at")){
+            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("look at")||nextLine.contains("go to")){
                if(nextLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
                   gameMain.inInventory("red cup note");
@@ -87,21 +88,32 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          
 
          //bookshelf interaction
-         if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
-            livingRoom.bookshelf.approachBookshelf();
-            String nextLine = playGame.nextLine();
-            System.out.println("\n");
-            if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
-               livingRoom.bookshelf.pickUpBook();
+         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what about approaching the bookshelf if you haven't been to the cups yet. 
+             if(!livingRoom.redCup.foundCup){
+               System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
+             } else{
+               livingRoom.bookshelf.approachBookshelf();
+               String nextLine = playGame.nextLine();
+               System.out.println("\n");
+               if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
+                  gameMain.inInventory("book"); //put down book?
+                  livingRoom.bookshelf.pickUpBook();
+               } 
             }
-         } else if(inLivingRoom == true && inputLine.contains("book") && inputLine.contains("use")){
-            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1");
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
-            System.out.println("There is no bookshelf in this room.");
+               System.out.println("There is no bookshelf in this room.");//no bookshelf in room
          }
+      
+         //using the cipher
+         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1"); //cipher to read book
+         } 
+            
+
 
          //table interaction
          if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
+            gameMain.inInventory("cipher");
             livingRoom.table.readMessage(); // put in a use cipher method later******
          } else if (inLivingRoom == false && inputLine.contains("table")){
             System.out.println("There is no table in this room.");
@@ -272,7 +284,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
 
-       
+
 
 
 
