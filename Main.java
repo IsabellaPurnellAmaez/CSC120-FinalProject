@@ -242,7 +242,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //mirror interaction
-
+         /*
          if(inputLine.contains("mirror") && (inputLine.contains("go to") || inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("you're now standing in front of the mirror");
             if(!bedroom.puzzle.getFlipped()){
@@ -253,7 +253,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                   gameMain.inInventory("key to outside");
                }
                }
-         }
+         }*/
             
 
          
