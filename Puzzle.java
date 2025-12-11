@@ -15,7 +15,6 @@ public class Puzzle {
             pieces.remove(Integer.valueOf(pieceNumber));
             //have this message say "you have placed *some number* of pieces." then say if the puzzle is done or not. 
             System.out.println("You have placed piece " + pieceNumber + " into the puzzle.");
-           
             }
         else {
             System.out.println("You don't have any pieces to finish the puzzle, go find them!");
