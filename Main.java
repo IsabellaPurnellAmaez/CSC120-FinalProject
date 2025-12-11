@@ -306,20 +306,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
 
-         //print inventory
-         if(inputLine.contains("print inventory")){
-            System.out.println("****************************");
-            System.out.println("INVENTORY:");
-            System.out.println("****************************");
-
-            for(int i = 1; i <= gameMain.getInventory().size(); i++){
-            System.out.println(gameMain.getInventory().get(i));
-            System.out.println("****************************");
-         }
-         }
-
-         
-
       } while (stillPlaying);
 
       if(inLivingRoom == false && inBedroom == false){
