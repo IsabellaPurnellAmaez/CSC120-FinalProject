@@ -8,21 +8,4 @@ public class Door {
         this.name = name;
         this.isLocked = true;
     }
-
-    public void unlock(){
-        Scanner scanner = new Scanner(System.in);
-        String keyInput = scanner.nextLine();
-        System.out.println("What key do you want to use?");
-        if(keyInput.equals(key.description)){ 
-            if(key.usage == this.name){
-                isLocked = false;
-            } else if(key.usage != this.name){
-                isLocked = true;
-                System.out.println("This key does not unlock " + this.name);
-            }
-        } else {
-            System.out.println("You don't have that key for this door.");
-        }
-        scanner.close();
-    }
 }
