@@ -58,26 +58,26 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
             if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("look at")||nextLine.contains("go to")){
                if(nextLine.contains("red")){ 
-                  livingRoom.redCup.pickUp();
+                  livingRoom.getRedCup().pickUp();
                   gameMain.inInventory("red cup note");
                } else if(nextLine.contains("blue")){
-                  livingRoom.blueCup.pickUp();
+                  livingRoom.getBlueCup().pickUp();
                   gameMain.inInventory("blue cup note");
                } else if(nextLine.contains("green")){
-                  livingRoom.greenCup.pickUp();
+                  livingRoom.getGreenCup().pickUp();
                   gameMain.inInventory("green cup note");
                } else{
                   System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
                   String colorChoice = playGame.nextLine();
                   System.out.println("");
                   if(colorChoice.contains("red")){ 
-                     livingRoom.redCup.pickUp();
+                     livingRoom.getRedCup().pickUp();
                      gameMain.inInventory("red cup note");
                   } else if(colorChoice.contains("blue")){
-                     livingRoom.blueCup.pickUp();
+                     livingRoom.getBlueCup().pickUp();
                      gameMain.inInventory("blue cup note");
                   } else if(colorChoice.contains("green")){
-                     livingRoom.greenCup.pickUp();
+                     livingRoom.getGreenCup().pickUp();
                      gameMain.inInventory("green cup note");
                   }
                }
@@ -158,12 +158,12 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inLivingRoom == true && livingRoom.box.open == true && inputLine.contains("key") && inputLine.contains("bedroom") &&(inputLine.contains("unlock") || inputLine.contains("use"))){
             System.out.println("What key do you want to use? Bedroom or outside?");
             String keyInput = playGame.nextLine();
-            if(keyInput.equals(livingRoom.bedroomDoorKey.description)){ 
-                  if(livingRoom.bedroomDoorKey.usage.equals(livingRoom.bedroomDoor.name)){
-                     livingRoom.bedroomDoor.isLocked = false;
+            if(keyInput.equals(livingRoom.getBedroomDoorKey().description)){ 
+                  if(livingRoom.getBedroomDoorKey().usage.equals(livingRoom.getBedroomDoor().name)){
+                     livingRoom.getBedroomDoor().isLocked = false;
                   } else {
-                     livingRoom.bedroomDoor.isLocked = true;
-                     System.out.println("This key does not unlock " + livingRoom.bedroomDoor.name);
+                     livingRoom.getBedroomDoor().isLocked = true;
+                     System.out.println("This key does not unlock " + livingRoom.getBedroomDoor().name);
                   }
             } else {
                   System.out.println("You don't have that key for this door.");
@@ -189,11 +189,11 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You approach the nightstand. It has two drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
-               bedroom.nightstand.open(1);
+               bedroom.getNightstand().open(1);
                gameMain.inInventory("puzzle piece 1");
                gameMain.inInventory("nightstand note");
             } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
-               bedroom.nightstand.open(2);
+               bedroom.getNightstand().open(2);
                gameMain.inInventory("puzzle piece 3");
             }
          }else if (inBedroom == false && inputLine.contains("nightstand")){
@@ -206,12 +206,12 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You approach the dresser. It has three drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
-               bedroom.dresser.open(1);
+               bedroom.getDresser().open(1);
             } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("middle")){
-               bedroom.dresser.open(2);
+               bedroom.getDresser().open(2);
             }
             else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
-               bedroom.dresser.open(3);
+               bedroom.getDresser().open(3);
             }
          } else if (inBedroom == false && inputLine.contains("dresser")){
             System.out.println("There is no dresser in this room.");
@@ -222,9 +222,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inBedroom == true && inputLine.contains("bed") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             System.out.println("You approach the bed.");
             if((inputLine.contains("lift") || inputLine.contains("pick up")) && (inputLine.contains("covers") || inputLine.contains("blanket") || inputLine.contains("sheets"))){
-               bedroom.bed.liftCovers();
+               bedroom.getBed().liftCovers();
                if((inputLine.contains("pick up") || inputLine.contains("look at")) && (inputLine.contains("note") || inputLine.contains("paper"))) {
-                  bedroom.bed.pickUp();
+                  bedroom.getBed().pickUp();
                }
             }  
          } else if (inBedroom == false && inputLine.contains("bed")){
@@ -245,10 +245,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          /*
          if(inputLine.contains("mirror") && (inputLine.contains("go to") || inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("you're now standing in front of the mirror");
-            if(!bedroom.puzzle.getFlipped()){
+            if(!bedroom.getPuzzle().getFlipped()){
                System.out.println("something looks off about the mirror to you but you can't quite tell what...keep looking around the room");
             } else if (inputLine.contains("mirror") && (inputLine.contains("look behind") || inputLine.contains("move") || inputLine.contains("pick up"))){
-               bedroom.mirror.pickUp();
+               bedroom.getMirror().pickUp();
                if (inputLine.contains("key") && inputLine.contains("pick up")){
                   gameMain.inInventory("key to outside");
                }

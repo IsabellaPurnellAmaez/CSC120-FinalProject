@@ -1,16 +1,16 @@
 public class LivingRoom {
-    public Cup redCup; 
-    public Cup blueCup; 
-    public Cup greenCup; 
+    private Cup redCup; 
+    private Cup blueCup; 
+    private Cup greenCup; 
 
     public Bookshelf bookshelf;
     public Table table;
     public Couch couch;
     public Box box;
 
-    public Door outsideDoor;
-    public Door bedroomDoor;
-    public Key bedroomDoorKey;
+    private Door outsideDoor;
+    private Door bedroomDoor;
+    private Key bedroomDoorKey;
 
     public String roomMessage;
 
