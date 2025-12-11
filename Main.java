@@ -8,18 +8,19 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    static Bedroom bedroom = new Bedroom();
    static ArrayList<Object> objectsInPossession = new ArrayList<Object>();
    
-   //public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
-      //if(livingRoom.redCup.foundCup){ 
-         //livingRoom.bookshelf.foundBook = true;
-      //}
-      //livingRoom.bookshelf.approachBookshelf();
-   //}
+ 
 
    private void holding(String item){
       objectsInPossession.add(item);
    }
 
+   private void notHolding(String item){
+      objectsInPossession.remove(item);
+   }
+
     public static void main (String[] args){ //idk what this duplicate modifier error means. Is it bc the object is named Main as well? 
+      Main gameMain = new Main();
+
       Boolean inLivingRoom = true;
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
@@ -42,20 +43,27 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             if(nextLine.contains("lift") || nextLine.contains("pick up")){
                if(nextLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
+                  gameMain.holding("red cup note");
                } else if(nextLine.contains("blue")){
                   livingRoom.blueCup.pickUp();
+                  gameMain.holding("blue cup note");
                } else if(nextLine.contains("green")){
                   livingRoom.greenCup.pickUp();
+                  gameMain.holding("green cup note");
+
                } else{
                   System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
                   String colorChoice = playGame.nextLine();
                   System.out.println("");
                   if(colorChoice.contains("red")){ 
                      livingRoom.redCup.pickUp();
+                     gameMain.holding("red cup note");
                   } else if(colorChoice.contains("blue")){
                      livingRoom.blueCup.pickUp();
+                     gameMain.holding("blue cup note");
                   } else if(colorChoice.contains("green")){
                      livingRoom.greenCup.pickUp();
+                     gameMain.holding("green cup note");
                   }
                }
             }
@@ -141,8 +149,11 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You approach the nightstand. It has two drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.nightstand.open(1);
+               gameMain.holding("puzzle piece 1");
+               gameMain.holding("nightstand note");
             } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
                bedroom.nightstand.open(2);
+               gameMain.holding("puzzle piece 3");
             }
          }else if (inBedroom == false && inputLine.contains("nightstand")){
             System.out.println("There is no nightstand in this room.");
@@ -182,10 +193,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //puzzle interaction
 
          if(inBedroom == true && inputLine.contains("puzzle") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what are the criteria for looking at the puzzle?
-            if(inputLine.conatains)
+            if(inputLine.contains("")){
+               d;
+            }
          } else if (inBedroom == false && inputLine.contains("puzzle")){
             System.out.println("There is no puzzle in this room.");
          }
+
+
 
 
 
