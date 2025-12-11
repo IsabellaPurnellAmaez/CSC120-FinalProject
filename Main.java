@@ -10,7 +10,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private ArrayList<String> inventory = new ArrayList<String>();
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
-   private String commandMessage = "POSSIBLE COMMANDS:\n________________\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - where am I / which room am I in\n________________\n";
+   private String commandMessage = "POSSIBLE COMMANDS:\n________________\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - look under <object>\n - print inventory \n- where am I / which room am I in\n________________\n ";
 
    private void inInventory(String item){
       inventory.add(item);
@@ -93,7 +93,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //bookshelf interaction
          if(inLivingRoom == true &&  inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what about approaching the bookshelf if you haven't been to the cups yet. 
-             if(!livingRoom.redCup.foundCup){
+             if(!livingRoom.getRedCup().foundCup){
                System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
              } else{
                livingRoom.bookshelf.approachBookshelf();
@@ -110,14 +110,29 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       
             
 
+//livingRoom.bookshelf.foundBook == true &&
 
          //table interaction
-         if(inLivingRoom == true && livingRoom.bookshelf.foundBook == true && inputLine.contains("table") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
-            gameMain.inInventory("cipher");
-            livingRoom.table.readMessage(); // put in a use cipher method later******
-         } else if (inLivingRoom == false && inputLine.contains("table")){
+         if(inLivingRoom == true && inputLine.contains("table") && inputLine.contains("go to")){
+            gameMain.location = "table";
+            System.out.println("you're at the table");
+         }else if (inLivingRoom == false && inputLine.contains("table")){
             System.out.println("There is no table in this room.");
          }
+
+
+         if(gameMain.location == "table"){
+            if( inputLine.contains("look under") && inputLine.contains("table")){
+               if(gameMain.inventory.contains("book")){
+                livingRoom.table.readMessage();
+                gameMain.inInventory("cipher");
+               } else {
+                  System.out.println("something feels weird but you don't know what. keep looking for clues.");
+               }
+            }
+         }
+            
+         
 
          //using the cipher
          if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
@@ -145,7 +160,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inLivingRoom == true && livingRoom.couch.lifted == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
             livingRoom.box.tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
             while(livingRoom.box.tryToOpen){ 
-                if(!(livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true)){
+                if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
                   System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.box.tryToOpen = false;
                 } else{
@@ -314,8 +329,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
             for(int i = 1; i <= gameMain.getInventory().size(); i++){
             System.out.println(gameMain.getInventory().get(i));
-            System.out.println("****************************");
          }
+         System.out.println("****************************");
+
          }
 
          

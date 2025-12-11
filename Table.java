@@ -12,7 +12,7 @@ public class Table {
             System.out.println(message);
             checkedUnder = true;
         }else{
-            System.out.println("Something about this table does look odd but you can't quite figure out what. Maybe keep looking around.");
+            System.out.println("You've already looked here. There's nothing else to see.");
         }
     }
    
