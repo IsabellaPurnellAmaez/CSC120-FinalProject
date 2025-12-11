@@ -321,6 +321,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
 
+<<<<<<< HEAD
          //print inventory
          if(inputLine.contains("print inventory")){
             System.out.println("****************************");
@@ -336,6 +337,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          
 
+=======
+>>>>>>> 907de58a4ee92fcfa71cff2dd061ed5633259f21
       } while (stillPlaying);
 
       if(inLivingRoom == false && inBedroom == false){
