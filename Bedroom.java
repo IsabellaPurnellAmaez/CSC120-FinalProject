@@ -11,6 +11,8 @@ public class Bedroom {
     public PuzzlePiece puzzlePiece3;
 
     public Mirror mirror;
+
+    public String roomMessage;
     //private int pieceNumber = ; //number of puzzle pieces found & on the player's person.
 
     public Bedroom(){
@@ -26,5 +28,7 @@ public class Bedroom {
         this.puzzlePiece3 = new PuzzlePiece("");
 
         this.mirror = new Mirror();
+
+        this.roomMessage = "You're in a bedroom with a bed, nightstand, and a dresser with a puzzle on it. There is one door leading to the livingroom.";
     }
 }
