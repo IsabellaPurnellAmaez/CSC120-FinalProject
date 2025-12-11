@@ -6,63 +6,85 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
-   static ArrayList<Object> objectsInPossession = new ArrayList<Object>();
-   
-   //public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
-      //if(livingRoom.redCup.foundCup){ 
-         //livingRoom.bookshelf.foundBook = true;
-      //}
-      //livingRoom.bookshelf.approachBookshelf();
-   //}
 
-   private void holding(String item){
-      objectsInPossession.add(item);
+   private ArrayList<Object> inventory = new ArrayList<Object>();
+   private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
+
+
+   private void inInventory(String item){
+      inventory.add(item);
    }
 
-    public static void main (String[] args){ //idk what this duplicate modifier error means. Is it bc the object is named Main as well? 
+   //private void removeInventory(String item){
+    //  inventory.remove(item);
+   //}
+
+    public static void main (String[] args){
+      Main gameMain = new Main();
+
       Boolean inLivingRoom = true;
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
    
-      System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a bookshelf, and a couch.");
+      System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
       
       do{
          System.out.println("");
-         inputLine = playGame.nextLine();
+         inputLine = playGame.nextLine().toLowerCase();
          System.out.println("");
          System.out.println(inLivingRoom);
          System.out.println(inBedroom);
-        //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup
-         if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
+
+
+        //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
+        
+        //go to cups
+        if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
+            gameMain.location = "cups";
             System.out.println("You approach the cups. There is a red cup, a blue cup, and a green cup. \n");   
-            System.out.println("Which cup would you like to pick up?");
-            String nextLine = playGame.nextLine();
+            //System.out.println("Which cup would you like to pick up?"); // idk if we need this line? I know we have to get them to pick up the cups but I wonder if there's a less overt way to prompt the player
             System.out.println("");
-            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("red") || nextLine.contains("blue") || nextLine.contains("green")){
+         }else if (inLivingRoom == false && inputLine.contains("cup")){
+            System.out.println("There are no cups in this room.");
+         }
+         //interact with cups 
+         if(gameMain.location == "cups"){ 
+            String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
+            if(nextLine.contains("cups") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){
+               System.out.println("You're already at the cups");
+            }
+            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("look at")){
                if(nextLine.contains("red")){ 
                   livingRoom.redCup.pickUp();
+                  gameMain.inInventory("red cup note");
                } else if(nextLine.contains("blue")){
                   livingRoom.blueCup.pickUp();
+                  gameMain.inInventory("blue cup note");
                } else if(nextLine.contains("green")){
                   livingRoom.greenCup.pickUp();
+                  gameMain.inInventory("green cup note");
                } else{
                   System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
                   String colorChoice = playGame.nextLine();
                   System.out.println("");
                   if(colorChoice.contains("red")){ 
                      livingRoom.redCup.pickUp();
+                     gameMain.inInventory("red cup note");
                   } else if(colorChoice.contains("blue")){
                      livingRoom.blueCup.pickUp();
+                     gameMain.inInventory("blue cup note");
                   } else if(colorChoice.contains("green")){
                      livingRoom.greenCup.pickUp();
+                     gameMain.inInventory("green cup note");
                   }
                }
             }
-         } else if (inLivingRoom == false && inputLine.contains("cup")){
-            System.out.println("There are no cups in this room.");
          } 
+    
+
+         
 
          //bookshelf interaction
          if(inLivingRoom == true && livingRoom.redCup.foundCup == true && inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
@@ -141,7 +163,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             if (doorChoice.contains("bedroom")){
                inLivingRoom = false;
                inBedroom = true;
-               System.out.println("You have now entered the bedroom.");
+               System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
             } else {
                System.out.println("You don't have the key to this the door yet.");
             }
@@ -149,26 +171,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("The door has already been unlocked.");
          }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
          //-----------
 
          //nightstand interaction
@@ -176,8 +178,11 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You approach the nightstand. It has two drawers.");
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.nightstand.open(1);
+               gameMain.inInventory("puzzle piece 1");
+               gameMain.inInventory("nightstand note");
             } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
                bedroom.nightstand.open(2);
+               gameMain.inInventory("puzzle piece 3");
             }
          }else if (inBedroom == false && inputLine.contains("nightstand")){
             System.out.println("There is no nightstand in this room.");
@@ -212,15 +217,38 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }  
          } else if (inBedroom == false && inputLine.contains("bed")){
             System.out.println("There is no bed in this room.");
-         } //theres probably a parenthesis issue here *******
+         } 
+         
 
          //puzzle interaction
 
-         if(inBedroom == true && inputLine.contains("puzzle") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what are the criteria for looking at the puzzle?
-            //if(inputLine.conatains)
+         if((inputLine.contains("place")|| inputLine.contains("put")) && inputLine.contains("piece")){
+               if(gameMain.inventory.contains("puzzle piece 1")){
+               }
          } else if (inBedroom == false && inputLine.contains("puzzle")){
             System.out.println("There is no puzzle in this room.");
          }
+
+         //mirror interaction
+         /*
+         if(inputLine.contains("mirror") && (inputLine.contains("go to") || inputLine.contains("approach") || inputLine.contains("look at"))){
+            System.out.println("you're now standing in front of the mirror");
+            if(!bedroom.puzzle.getFlipped()){
+               System.out.println("something looks off about the mirror to you but you can't quite tell what...keep looking around the room");
+            } else if (inputLine.contains("mirror") && (inputLine.contains("look behind") || inputLine.contains("move") || inputLine.contains("pick up"))){
+               bedroom.mirror.pickUp();
+               if (inputLine.contains("key") && inputLine.contains("pick up")){
+                  gameMain.inInventory("key to outside");
+               }
+               }
+         }*/
+            
+
+         
+
+
+
+
 
 
 
@@ -244,7 +272,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
 
-
+       
 
 
 

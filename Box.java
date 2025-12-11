@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Box {
     public String boxCode; //could be int? could figure out how to do the thing where it takes in multiple possible types for int or string.
