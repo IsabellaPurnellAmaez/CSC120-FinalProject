@@ -49,7 +49,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }else if (inLivingRoom == false && inputLine.contains("cup")){
             System.out.println("There are no cups in this room.");
          }
-         
+
          //interact with cups 
          if(gameMain.location == "cups"){ 
             String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
@@ -104,10 +104,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                System.out.println("There is no bookshelf in this room.");//no bookshelf in room
          }
       
-         //using the cipher
-         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
-            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1"); //cipher to read book
-         } 
             
 
 
@@ -119,37 +115,61 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no table in this room.");
          }
 
+         //using the cipher
+         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
+         } 
+
          //couch interaction
          if(inLivingRoom == true && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
-            livingRoom.couch.pickUpCushions();
-         } else if (inLivingRoom == false && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
+            gameMain.location = "couch";
+            System.out.println("You're at the couch");
+          } else if (inLivingRoom == false && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a couch here.");
+          }
+         
+          //lift cushions
+         if(gameMain.location == "couch"){
+            if(inputLine.contains("pick up") && inputLine.contains("cushion")){
+               livingRoom.couch.pickUpCushions();
+            }
          }
+        
+         
 
          //box interaction
-         if(inLivingRoom == true && livingRoom.couch.lifted == true && livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
+         if(inLivingRoom == true && livingRoom.couch.lifted == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
             livingRoom.box.tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
             while(livingRoom.box.tryToOpen){ 
-               System.out.println("Enter the 4 digit code to open the box:");
-               String codeTry = playGame.nextLine();
-               if(codeTry.equals(livingRoom.box.boxCode)){
-                     System.out.println("You've opened the box! Inside is a key.");
-                     livingRoom.box.tryToOpen = false;
-                     livingRoom.box.open = true;
-               }  else{
-                     System.out.println("Not quite right, care to try again?"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
-                     String endTry = playGame.nextLine().trim();
-                     if (endTry.contains("no") || endTry.contains("No")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
-                        livingRoom.box.tryToOpen = false;
-                        livingRoom.box.open = true;
-                        System.out.println("Ok, now what will you do?"); 
-                     } else if (endTry.contains(livingRoom.box.boxCode)){
+                if(!(livingRoom.blueCup.foundCup == true && livingRoom.greenCup.foundCup == true)){
+                  System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
+                  livingRoom.box.tryToOpen = false;
+                } else{
+                  System.out.println("Enter the 4 digit code to open the box:");
+                  String codeTry = playGame.nextLine();
+                  if(codeTry.equals(livingRoom.box.boxCode)){
                         System.out.println("You've opened the box! Inside is a key.");
-                        livingRoom.box.open = true;
                         livingRoom.box.tryToOpen = false;
-                     }
+                        livingRoom.box.open = true;
+                  }  else{
+                        System.out.println("Not quite right, care to try again?"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
+                        String endTry = playGame.nextLine().trim();
+                        if (endTry.contains("no") || endTry.contains("No")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
+                           livingRoom.box.tryToOpen = false;
+                           livingRoom.box.open = true;
+                           System.out.println("Ok, now what will you do?"); 
+                        } else if (endTry.contains(livingRoom.box.boxCode)){
+                           System.out.println("You've opened the box! Inside is a key.");
+                           livingRoom.box.open = true;
+                           livingRoom.box.tryToOpen = false;
+                        }
+                  }
                }
-            }
+
+                }
+
+
+               
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
@@ -256,20 +276,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }*/
             
 
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
 
          //room location check
 
@@ -285,78 +291,19 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
 
+         //look around
+         if(inputLine.contains("look around")){
+            if(inLivingRoom){
+               System.out.println(livingRoom.roomMessage);
+            } else if(inBedroom){
+               System.out.println(bedroom.roomMessage);
+            } else{
+               System.out.println("You've escaped the house!");
+            }
+         }
 
-
-
-
-
-         
-
-
-
-
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-         //-----------
       } while (stillPlaying);
 
-      
       if(inLivingRoom == false && inBedroom == false){
          stillPlaying = false;
          System.out.println("Congrats! You've have escaped the room!");
