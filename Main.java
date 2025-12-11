@@ -1,10 +1,26 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Main { //im wondering if theres a way to make a list of all the objects in each room. That way if someone is trying to go to an object it first checks that they're in the appropriate room first? I think it'd be more efficient to do that in main rather than have each object have a Boolean attribute that's 'inLivingRoom' or 'inBedroom'...
 
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
+<<<<<<< HEAD
+=======
+   static ArrayList<Object> objectsInPossession = new ArrayList<Object>();
+   
+   //public void checkBookshelf(){ //need a bunch of methods to access object methods and reset booleans about whether or not clues can be accessed yet
+      //if(livingRoom.redCup.foundCup){ 
+         //livingRoom.bookshelf.foundBook = true;
+      //}
+      //livingRoom.bookshelf.approachBookshelf();
+   //}
+>>>>>>> refs/remotes/origin/main
+
+   private void holding(String item){
+      objectsInPossession.add(item);
+   }
 
     public static void main (String[] args){ //idk what this duplicate modifier error means. Is it bc the object is named Main as well? 
       Boolean inLivingRoom = true;
@@ -135,6 +151,30 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("key")){
             System.out.println("The door has already been unlocked.");
          }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+>>>>>>> refs/remotes/origin/main
          //-----------
 
          //nightstand interaction
@@ -178,9 +218,16 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }  
          } else if (inBedroom == false && inputLine.contains("bed")){
             System.out.println("There is no bed in this room.");
+         } //theres probably a parenthesis issue here *******
+
+         //puzzle interaction
+
+         if(inBedroom == true && inputLine.contains("puzzle") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what are the criteria for looking at the puzzle?
+            if(inputLine.conatains)
+         } else if (inBedroom == false && inputLine.contains("puzzle")){
+            System.out.println("There is no puzzle in this room.");
          }
 
-         //
 
 
 
