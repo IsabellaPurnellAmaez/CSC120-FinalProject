@@ -3,16 +3,16 @@ public class LivingRoom {
     private Cup blueCup; 
     private Cup greenCup; 
 
-    public Bookshelf bookshelf;
-    public Table table;
-    public Couch couch;
-    public Box box;
+    private Bookshelf bookshelf;
+    private Table table;
+    private Couch couch;
+    private Box box;
 
     private Door outsideDoor;
     private Door bedroomDoor;
     private Key bedroomDoorKey;
 
-    public String roomMessage;
+    private String roomMessage;
 
     public LivingRoom(){
         this.redCup = new Cup("Inside the red cup is a piece of paper. On it is a note: 'Look at the bookshelf'");

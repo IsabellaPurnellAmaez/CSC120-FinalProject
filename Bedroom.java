@@ -14,7 +14,7 @@ public class Bedroom {
 
     private Mirror mirror;
 
-    public String roomMessage;
+    private String roomMessage;
     //private int pieceNumber = ; //number of puzzle pieces found & on the player's person.
 
     public Bedroom(){
