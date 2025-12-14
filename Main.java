@@ -90,7 +90,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
     
 
          
-
+ 
          //bookshelf interaction
          if(inLivingRoom == true &&  inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what about approaching the bookshelf if you haven't been to the cups yet. 
              if(!livingRoom.getRedCup().foundCup){
