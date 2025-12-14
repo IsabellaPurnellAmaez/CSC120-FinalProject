@@ -10,7 +10,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private ArrayList<String> inventory = new ArrayList<String>();
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
-   private String commandMessage = "****************************\nPOSSIBLE COMMANDS:\n****************************\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - look under <object>\n - print inventory \n- where am I / which room am I in\n****************************\n ";
+   private static ArrayList<String> commands = new ArrayList<String>();
 
    private void inInventory(String item){
       inventory.add(item);
@@ -30,8 +30,23 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       Boolean inLivingRoom = true;
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
-   
-      System.out.println(gameMain.commandMessage);
+
+      commands.add("go to");
+      commands.add("look at");
+      commands.add("pick up");
+      commands.add("use");
+      commands.add("look under");
+      commands.add("look behind");
+      commands.add("look around");
+      commands.add("print inventory");
+      commands.add("which room am I in?");
+      commands.add("Where am I?");
+      
+      System.out.println("****************************\nPOSSIBLE COMMANDS:\n****************************");
+      for(String commands : commands){
+         System.out.println("- " +commands);
+      }
+      System.out.println( "****************************\n");
       System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
@@ -331,16 +346,20 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //print inventory
-         if(inputLine.contains("print inventory")){
+         if(inputLine.contains("print inventory") && gameMain.getInventory().size() > 0){
             System.out.println("****************************");
             System.out.println("INVENTORY:");
             System.out.println("****************************");
 
-            for(int i = 1; i <= gameMain.getInventory().size(); i++){
-               System.out.println(gameMain.getInventory().get(i));
-            }
-
+            System.out.println(gameMain.getInventory());
+            
             System.out.println("****************************");
+         } else if(inputLine.contains("print inventory") && gameMain.getInventory().size() == 0){
+            System.out.println("Your inventory is empty.");
+         }
+
+         if(!inputLine.equals(commands)){
+            System.out.println("Command not recognized. Please try again.");
          }
 
       } while (stillPlaying);
