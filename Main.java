@@ -10,7 +10,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private ArrayList<String> inventory = new ArrayList<String>();
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
-   private String commandMessage = "****************************\nPOSSIBLE COMMANDS:\n****************************\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - look under <object>\n - print inventory \n- where am I / which room am I in\n________________\n ";
+   private String commandMessage = "****************************\nPOSSIBLE COMMANDS:\n****************************\n - go to <object>\n - pick up <object>\n - open <object>\n - use <object>\n - unlock <object>\n - look under <object>\n - print inventory \n- where am I / which room am I in\n****************************\n ";
 
    private void inInventory(String item){
       inventory.add(item);
