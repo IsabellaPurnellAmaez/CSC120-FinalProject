@@ -45,7 +45,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
         //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
         
         //go to cups
-        if(inLivingRoom == true && inputLine.contains("cup") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
+
+        /* 
+
+        if(inLivingRoom == true && inputLine.contains("cup") && inputLine.contains("go to")){ //starting to write code interacting with the player. Not sure if it should be in main or in the methods above...
             gameMain.location = "cups";
             System.out.println("You approach the cups. There is a red cup, a blue cup, and a green cup. \n");   
             //System.out.println("Which cup would you like to pick up?"); // idk if we need this line? I know we have to get them to pick up the cups but I wonder if there's a less overt way to prompt the player
@@ -55,12 +58,12 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          //interact with cups 
-         if(gameMain.location == "cups"){ 
+         if(gameMain.location == "cups" || gameMain.location == "table"){ 
             String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
-            if(nextLine.contains("cups") && (inputLine.contains("approach") ||  inputLine.contains("go to"))){
+            if(nextLine.contains("cups") &&  inputLine.contains("go to")){
                System.out.println("You're already at the cups");
             }
-            if(nextLine.contains("lift") || nextLine.contains("pick up") || nextLine.contains("look at")||nextLine.contains("go to")){
+            else if(nextLine.contains("pick up")){
                if(nextLine.contains("red")){ 
                   livingRoom.getRedCup().pickUp();
                   gameMain.inInventory("red cup note");
@@ -70,29 +73,50 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                } else if(nextLine.contains("green")){
                   livingRoom.getGreenCup().pickUp();
                   gameMain.inInventory("green cup note");
-               } else{
-                  System.out.println("What color cup do you want to pick up? red, blue, or green?\n");
-                  String colorChoice = playGame.nextLine();
-                  System.out.println("");
-                  if(colorChoice.contains("red")){ 
-                     livingRoom.getRedCup().pickUp();
-                     gameMain.inInventory("red cup note");
-                  } else if(colorChoice.contains("blue")){
-                     livingRoom.getBlueCup().pickUp();
-                     gameMain.inInventory("blue cup note");
-                  } else if(colorChoice.contains("green")){
-                     livingRoom.getGreenCup().pickUp();
-                     gameMain.inInventory("green cup note");
-                  }
-               }
+               } 
             }
          } 
-    
+
+         */ 
+
+         //table/cup interaction
+         if(inLivingRoom == true  &&  inputLine.contains("go to") && (inputLine.contains("table") || inputLine.contains("cup"))){
+            gameMain.location = "table";
+            System.out.println("you're at the table, there are three cups on top. A red cup, a blue cup, and a green cup.");
+         }else if (inLivingRoom == false && inputLine.contains("table")){
+            System.out.println("There is no table in this room.");
+         }
+         
+         
+
+         if(gameMain.location == "table"){
+            //String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
+            if(inputLine.contains("pick up")){
+               if(inputLine.contains("red")){ 
+                  livingRoom.getRedCup().pickUp();
+                  gameMain.inInventory("red cup note");
+               } else if(inputLine.contains("blue")){
+                  livingRoom.getBlueCup().pickUp();
+                  gameMain.inInventory("blue cup note");
+               } else if(inputLine.contains("green")){
+                  livingRoom.getGreenCup().pickUp();
+                  gameMain.inInventory("green cup note");
+               }
+            } else if( inputLine.contains("look under") && inputLine.contains("table")){
+               if(gameMain.inventory.contains("book")){
+                livingRoom.getTable().readMessage();
+                gameMain.inInventory("cipher");
+               } else {
+                  System.out.println("something feels weird but you don't know what. keep looking for clues.");
+               }
+            }
+         }
+
 
          
  
          //bookshelf interaction
-         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){ //what about approaching the bookshelf if you haven't been to the cups yet. 
+         if(inLivingRoom == true &&  inputLine.contains("bookshelf") &&  inputLine.contains("go to")){ //what about approaching the bookshelf if you haven't been to the cups yet. 
              if(!livingRoom.getRedCup().foundCup){
                System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
              } else{
@@ -110,29 +134,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       
             
 
-//livingRoom.bookshelf.foundBook == true &&
+         
 
-         //table interaction
-         if(inLivingRoom == true && inputLine.contains("table") && inputLine.contains("go to")){
-            gameMain.location = "table";
-            System.out.println("you're at the table");
-            gameMain.inInventory("table note");
-         }else if (inLivingRoom == false && inputLine.contains("table")){
-            System.out.println("There is no table in this room.");
-         }
-
-
-         if(gameMain.location == "table"){
-            if( inputLine.contains("look under") && inputLine.contains("table")){
-               if(gameMain.inventory.contains("book")){
-                livingRoom.getTable().readMessage();
-                gameMain.inInventory("cipher");
-               } else {
-                  System.out.println("something feels weird but you don't know what. keep looking for clues.");
-               }
-            }
-         }
-
+         
          //using the cipher
          if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
             System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
@@ -149,13 +153,13 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          
           //lift cushions
          if(gameMain.location == "couch"){
-            if(inputLine.contains("pick up") && inputLine.contains("cushion")){
+            if((inputLine.contains("pick up") && inputLine.contains("cushion")) || (inputLine.contains("look under"))){
                livingRoom.getCouch().pickUpCushions();
                gameMain.inInventory("box");
             }
          }
         
-         
+   
 
          //box interaction
          if(inLivingRoom == true && livingRoom.getCouch().lifted == true && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("open"))){
@@ -304,7 +308,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //room location check
 
          if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what")) || inputLine.contains("where am i")){
-                     if(inLivingRoom == true){
+               if(inLivingRoom == true){
                System.out.println("You are currently in the living room.");
             } else if (inBedroom == true){
                System.out.println("You are currently in the bedroom.");
