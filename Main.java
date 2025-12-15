@@ -13,6 +13,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private static ArrayList<String> commands = new ArrayList<String>();
    private static boolean commandRecognized = false;
 
+   private static ArrayList<String> livingRoomObjects = new ArrayList<String>();
+   private static ArrayList<String> bedroomObjects = new ArrayList<String>();
+
    private void inInventory(String item){
       inventory.add(item);
    }
@@ -42,6 +45,26 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       commands.add("print inventory");
       commands.add("which room am I in?");
       commands.add("Where am I?");
+
+      livingRoomObjects.add("cup");
+      livingRoomObjects.add("table");
+      livingRoomObjects.add("book");
+      livingRoomObjects.add("cipher");
+      livingRoomObjects.add("bookshelf");
+      livingRoomObjects.add("couch");
+      livingRoomObjects.add("box");
+      livingRoomObjects.add("key");
+      livingRoomObjects.add("bedroom door");
+      livingRoomObjects.add("outside door");
+
+      bedroomObjects.add("bed");
+      bedroomObjects.add("nightstand");
+      bedroomObjects.add("dresser");
+      bedroomObjects.add("puzzle");
+      bedroomObjects.add("mirror");
+      bedroomObjects.add("key");
+
+
       
       System.out.println("****************************\nPOSSIBLE COMMANDS:\n****************************");
       for(String commands : commands){
@@ -138,7 +161,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
                   gameMain.inInventory("book"); //put down book?
                   livingRoom.getBookshelf().pickUpBook();
-               } 
+               } else {
+                  System.out.println("Your command is not recognized. Please try again.");
+               }
             }
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
                System.out.println("There is no bookshelf in this room.");//no bookshelf in room
@@ -355,15 +380,27 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("Your inventory is empty.");
          }
 
-         for(String command : commands){
+         for(String command : commands){ //converts the list of commands into a string and checks if the inputLine contains any of them
             if(inputLine.contains(command)){
                commandRecognized = true;
                break;
             }
          }
-         if(!inputLine.contains("cup") || !inputLine.contains("table") || !inputLine.contains("bookshelf") || !inputLine.contains("couch") || !inputLine.contains("box") || !inputLine.contains("key") || !inputLine.contains("bedroom") || !inputLine.contains("nightstand") || !inputLine.contains("dresser") || !inputLine.contains("bed") || !inputLine.contains("puzzle") || !inputLine.contains("mirror") || !inputLine.contains("inventory") || !inputLine.contains("room")){
-            commandRecognized = false;
+         
+         for(String object : livingRoomObjects){
+            if(inputLine.contains(object)){
+               commandRecognized = true;
+               break;
+            }
          }
+
+         for(String object : bedroomObjects){
+            if(inputLine.contains(object)){
+               commandRecognized = true;
+               break;
+            }
+         }
+         
          if(commandRecognized == false){
             System.out.println("Your command is not recognized. Please try again.");
          }
