@@ -11,6 +11,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
 
    private static ArrayList<String> commands = new ArrayList<String>();
+   private static boolean commandRecognized = false;
 
    private void inInventory(String item){
       inventory.add(item);
@@ -55,7 +56,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          System.out.println("");
          inputLine = playGame.nextLine().toLowerCase();
          System.out.println("");
-
 
         //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
         
@@ -102,21 +102,17 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no table in this room.");
          }
          
-         
-
          if(gameMain.location == "table"){
             //String nextLine = playGame.nextLine(); //why change this variable? why not use inputLine? Is it just for clarity?
-            if(inputLine.contains("pick up")){
-               if(inputLine.contains("red")){ 
-                  livingRoom.getRedCup().pickUp();
-                  gameMain.inInventory("red cup note");
-               } else if(inputLine.contains("blue")){
-                  livingRoom.getBlueCup().pickUp();
-                  gameMain.inInventory("blue cup note");
-               } else if(inputLine.contains("green")){
-                  livingRoom.getGreenCup().pickUp();
-                  gameMain.inInventory("green cup note");
-               }
+            if(inputLine.contains("pick up") && inputLine.contains("red cup")){
+               livingRoom.getRedCup().pickUp();
+               gameMain.inInventory("red cup note");
+            } else if(inputLine.contains("pick up") && inputLine.contains("blue cup")){
+               livingRoom.getBlueCup().pickUp();
+               gameMain.inInventory("blue cup note");
+            } else if(inputLine.contains("pick up") && inputLine.contains("green cup")){
+               livingRoom.getGreenCup().pickUp();
+               gameMain.inInventory("green cup note");
             } else if( inputLine.contains("look under") && inputLine.contains("table")){
                if(gameMain.inventory.contains("book")){
                 livingRoom.getTable().readMessage();
@@ -132,9 +128,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
  
          //bookshelf interaction
          if(inLivingRoom == true &&  inputLine.contains("bookshelf") &&  inputLine.contains("go to")){ //what about approaching the bookshelf if you haven't been to the cups yet. 
-             if(!livingRoom.getRedCup().foundCup){
+            gameMain.location = "bookshelf";
+            if(!livingRoom.getRedCup().foundCup){
                System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
-             } else{
+            } else{
                livingRoom.getBookshelf().approachBookshelf();
                String nextLine = playGame.nextLine();
                System.out.println("\n");
@@ -358,10 +355,18 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("Your inventory is empty.");
          }
 
-         if(!inputLine.equals(commands)){
-            System.out.println("Command not recognized. Please try again.");
+         for(String command : commands){
+            if(inputLine.contains(command)){
+               commandRecognized = true;
+               break;
+            }
          }
-
+         if(!inputLine.contains("cup") || !inputLine.contains("table") || !inputLine.contains("bookshelf") || !inputLine.contains("couch") || !inputLine.contains("box") || !inputLine.contains("key") || !inputLine.contains("bedroom") || !inputLine.contains("nightstand") || !inputLine.contains("dresser") || !inputLine.contains("bed") || !inputLine.contains("puzzle") || !inputLine.contains("mirror") || !inputLine.contains("inventory") || !inputLine.contains("room")){
+            commandRecognized = false;
+         }
+         if(commandRecognized == false){
+            System.out.println("Your command is not recognized. Please try again.");
+         }
       } while (stillPlaying);
 
       if(inLivingRoom == false && inBedroom == false){
