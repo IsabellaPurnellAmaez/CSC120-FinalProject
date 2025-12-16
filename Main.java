@@ -45,8 +45,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       commands.add("look behind");
       commands.add("look around");
       commands.add("print inventory");
-      commands.add("which room am I in?");
-      commands.add("Where am I?");
+      commands.add("which room am I in");
+      commands.add("Where am I");
 
       livingRoomObjects.add("cup");
       livingRoomObjects.add("table");
@@ -319,7 +319,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //room location check
 
-         if(inputLine.contains("room") && inputLine.contains("in") && (inputLine.contains("which") || inputLine.contains("what")) || inputLine.contains("where am i")){
+         if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
                if(inLivingRoom == true){
                System.out.println("You are currently in the living room.");
             } else if (inBedroom == true){
@@ -348,7 +348,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("INVENTORY:");
             System.out.println("****************************");
 
-            System.out.println(gameMain.getInventory());
+            for(String item : gameMain.getInventory()){
+               System.out.println("- " + item);
+            }
             
             System.out.println("****************************");
          } else if(inputLine.contains("print inventory") && gameMain.getInventory().size() == 0){
@@ -380,7 +382,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("Your command is not recognized. Please try again.");
          }
 
-         if(objectRecognized == false && commandRecognized == true){
+         if(objectRecognized == false){
             System.out.println("There is no such object in this room. Please try again.");
          }
       } while (stillPlaying);
