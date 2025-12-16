@@ -32,8 +32,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    public static void main (String[] args){
       Main gameMain = new Main();
 
-      Boolean inLivingRoom = true;
-      Boolean inBedroom = false;
+      Boolean inLivingRoom = false;
+      Boolean inBedroom = true;
       Boolean stillPlaying = true;
 
       commands.add("go to");
@@ -251,7 +251,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //dresser interaction
 
          if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("go to") || inputLine.contains("look at"))){
-            System.out.println("You approach the dresser. It has three drawers.");
+            System.out.println("You approach the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
             gameMain.location = "dresser";
          }
 
