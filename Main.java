@@ -82,7 +82,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          inputLine = playGame.nextLine().toLowerCase();
          System.out.println("");
 
-        //cups interaction --> fix b/c you have to keep saying "go to cups" if you want to pick up another cup (also you can pick up the same cup over and over again. I think we want to be able to pick it up once and then have the note in an inventory)
+         
+
         
 
     
@@ -111,31 +112,30 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                } else {
                   System.out.println("something feels weird but you don't know what. keep looking for clues.");
                }
-            }
+            } 
          }
 
 
          
          
          //bookshelf interaction
-         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet. 
-            gameMain.location = "bookshelf";
+         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet.
             System.out.println("You're at the bookshelf. You notice there's one book that has it's spine turned in.");
+            gameMain.location = "bookshelf";
          } else if(inLivingRoom == true && inputLine.contains("bookshelf") &&  inputLine.contains("go to")){
             System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
+            gameMain.location = "bookshelf";
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
             System.out.println("There is no bookshelf in this room.");//no bookshelf in room 
          } else if (inLivingRoom == true && gameMain.getInventory().contains("book") && inputLine.contains("bookshelf")){
-            System.out.println("You're at the bookshelf. You notice there's one book that has it's spine turned in.");
+            System.out.println("You've already found the weird looking book, nothing else to see here.");
          }
 
          if(gameMain.location == "bookshelf"){
             if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
                gameMain.inInventory("book"); //put down book?
                livingRoom.getBookshelf().pickUpBook();
-            } else {
-               System.out.println("Your command is not recognized. Please try again.");
-            }
+            } 
          } 
 
          
@@ -374,7 +374,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
          
-         if(commandRecognized == false && (objectRecognized == true || objectRecognized == false)){
+         if(commandRecognized == false){
             System.out.println("Your command is not recognized. Please try again.");
          }
 
