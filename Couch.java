@@ -12,7 +12,7 @@ public class Couch {
             System.out.println(this.liftedMessage);
             this.lifted = true;
         } else{
-            System.out.println("You've already checked under the cushions.");
+            System.out.println("You've already checked under the cushions. Underneath the couch cushions is a small black box with a lock on it.");
         }
     }
     
