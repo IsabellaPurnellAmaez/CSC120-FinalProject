@@ -206,13 +206,16 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //key and bedroom door interaction
          if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("pick up")) || (inputLine.contains("unlock") || inputLine.contains("door"))))){
+            gameMain.location = "bedroom door";
+         }
+         if(gameMain.location == "bedroom door"){
             System.out.println("What door do you want to open? Bedroom or outside. \n");
             String doorChoice = playGame.nextLine();
-            if (doorChoice.contains("bedroom")){
+            if (inputLine.contains("bedroom")){
                inLivingRoom = false;
                inBedroom = true;
                System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
-            } else {
+            } else if (!inputLine.contains("bedroom")){
                System.out.println("You don't have the key to this the door yet. Try the other one. \n");
                String doorChoice2 = playGame.nextLine();
                if(doorChoice2.contains("bedroom")){
