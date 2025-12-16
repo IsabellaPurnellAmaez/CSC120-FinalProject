@@ -25,8 +25,8 @@ public class LivingRoom {
         this.box = new Box();
         
 
-        this.outsideDoor = new Door("Outside door");
-        this.bedroomDoor = new Door("Bedroom door");
+        this.outsideDoor = new Door("outside");
+        this.bedroomDoor = new Door("bedroom");
         this.bedroomDoorKey = new Key("Bedroom door");
 
         this.roomMessage = "Inside the living room is a table with three cups on it, a couch, and a bookshelf. There are two doors, the one you came through and a door leading to another room.";

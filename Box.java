@@ -13,6 +13,8 @@ public class Box {
 
     }
 
+    
+
     public void pickUp(){
         System.out.println(checkOutBox);
     }
