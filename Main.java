@@ -12,6 +12,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
    private static ArrayList<String> commands = new ArrayList<String>();
    private static boolean commandRecognized = false;
+   private static boolean objectRecognized = false;
 
    private static ArrayList<String> livingRoomObjects = new ArrayList<String>();
    private static ArrayList<String> bedroomObjects = new ArrayList<String>();
@@ -54,7 +55,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       livingRoomObjects.add("bookshelf");
       livingRoomObjects.add("couch");
       livingRoomObjects.add("box");
-      livingRoomObjects.add("key");
+      livingRoomObjects.add("key"); // bedroom door key
       livingRoomObjects.add("bedroom door");
       livingRoomObjects.add("outside door");
 
@@ -63,7 +64,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
       bedroomObjects.add("dresser");
       bedroomObjects.add("puzzle");
       bedroomObjects.add("mirror");
-      bedroomObjects.add("key");
+      bedroomObjects.add("key"); // outside door key
 
 
       
@@ -115,28 +116,27 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
 
          
- 
+         
          //bookshelf interaction
-         if(inLivingRoom == true &&  inputLine.contains("bookshelf") &&  inputLine.contains("go to")){ //what about approaching the bookshelf if you haven't been to the cups yet. 
+         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet. 
             gameMain.location = "bookshelf";
-            if(!livingRoom.getRedCup().foundCup){
-               System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
-            } else{
-               livingRoom.getBookshelf().approachBookshelf();
-               String nextLine = playGame.nextLine();
-               System.out.println("\n");
-               if(nextLine.contains("book") && (nextLine.contains("pick up") || nextLine.contains("look at"))){
-                  gameMain.inInventory("book"); //put down book?
-                  livingRoom.getBookshelf().pickUpBook();
-               } else {
-                  System.out.println("Your command is not recognized. Please try again.");
-               }
-            }
+            System.out.println("You're at the bookshelf. You notice there's one book that has it's spine turned in.");
+         } else if(inLivingRoom == true && inputLine.contains("bookshelf") &&  inputLine.contains("go to")){
+            System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
-               System.out.println("There is no bookshelf in this room.");//no bookshelf in room
+            System.out.println("There is no bookshelf in this room.");//no bookshelf in room 
+         } else if (inLivingRoom == true && gameMain.getInventory().contains("book") && inputLine.contains("bookshelf")){
+            System.out.println("You're at the bookshelf. You notice there's one book that has it's spine turned in.");
          }
-      
-            
+
+         if(gameMain.location == "bookshelf"){
+            if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
+               gameMain.inInventory("book"); //put down book?
+               livingRoom.getBookshelf().pickUpBook();
+            } else {
+               System.out.println("Your command is not recognized. Please try again.");
+            }
+         } 
 
          
 
@@ -368,20 +368,24 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          
          for(String object : livingRoomObjects){
             if(inputLine.contains(object)){
-               commandRecognized = true;
+               objectRecognized = true;
                break;
             }
          }
 
          for(String object : bedroomObjects){
             if(inputLine.contains(object)){
-               commandRecognized = true;
+               objectRecognized = true;
                break;
             }
          }
          
-         if(commandRecognized == false){
+         if(commandRecognized == false && (objectRecognized == true || objectRecognized == false)){
             System.out.println("Your command is not recognized. Please try again.");
+         }
+
+         if(objectRecognized == false && commandRecognized == true){
+            System.out.println("There is no such object in this room. Please try again.");
          }
       } while (stillPlaying);
 
