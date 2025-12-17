@@ -264,6 +264,20 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
                bedroom.getDresser().open(3);
             }
+            
+            if((inputLine.contains("place")|| inputLine.contains("put")) && inputLine.contains("piece")){
+               if(gameMain.inventory.contains("puzzle piece 1")){
+                  bedroom.getPuzzle().placePiece("puzzle piece 1");
+               }
+               if(gameMain.inventory.contains("puzzle piece 2")){
+                  bedroom.getPuzzle().placePiece("puzzle piece 2");
+               }
+               if(gameMain.inventory.contains("puzzle piece 3")){
+                  bedroom.getPuzzle().placePiece("puzzle piece 3");
+               }
+         } else if (inBedroom == false && inputLine.contains("puzzle")){
+            System.out.println("There is no puzzle in this room.");
+         }
          } else if (inBedroom == false && inputLine.contains("dresser")){
             System.out.println("There is no dresser in this room.");
          }
@@ -291,15 +305,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          
          
 
-         //puzzle interaction
 
-         if((inputLine.contains("place")|| inputLine.contains("put")) && inputLine.contains("piece")){
-               if(gameMain.inventory.contains("puzzle piece 1")){
-               }
-               gameMain.inInventory("puzzle clue");
-         } else if (inBedroom == false && inputLine.contains("puzzle")){
-            System.out.println("There is no puzzle in this room.");
-         }
+         
 
          //mirror interaction
       

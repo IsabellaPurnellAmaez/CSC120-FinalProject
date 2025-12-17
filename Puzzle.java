@@ -26,6 +26,10 @@ public class Puzzle {
             System.out.println("You don't have any pieces to finish the puzzle, go find them!");
         }
 
+        if(this.pieces.size() == 0){
+            System.out.println("You've completed the puzzle and a message is revealed. It now says 'flip me over'");
+        }
+
     }
 
     public void flipPuzzle(){
