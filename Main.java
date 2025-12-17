@@ -314,13 +314,43 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("you're now standing in front of the mirror");
             if(!bedroom.getPuzzle().getFlipped()){
                System.out.println("something looks off about the mirror to you but you can't quite tell what...keep looking around the room");
-            } else if (inputLine.contains("mirror") && (inputLine.contains("look behind") || inputLine.contains("move") || inputLine.contains("pick up"))){
+            } else if (inputLine.contains("mirror") && (inputLine.contains("look behind") || inputLine.contains("pick up"))){
                bedroom.getMirror().pickUp();
-               if (inputLine.contains("key") && inputLine.contains("pick up")){
-                  gameMain.inInventory("key to outside");
-               }
-               }
+               gameMain.inInventory("key to outside");   
+            }
          } 
+
+         if (inLivingRoom == true && gameMain.getInventory().contains("key to outside") && inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("unlock")))){
+            gameMain.location = "outside door";
+         }
+         if(gameMain.location == "outside door"){
+            System.out.println("What door do you want to open? Bedroom or outside. \n");
+            if (inputLine.contains("outside")){
+               inLivingRoom = false;
+               inBedroom = false;
+               System.out.println("You've unlocked the door and stepped outside!");
+            } else if (!inputLine.contains("outside")){
+               System.out.println("There are no other locked doors\n");
+               String doorChoice = playGame.nextLine();
+               if(doorChoice.contains("bedroom")){
+                  inLivingRoom = false;
+                  inBedroom = false;
+                  System.out.println("You've unlocked the door and stepped outside!");
+               }
+            }
+         }
+
+         if(livingRoom.getBedroomDoor().isLocked == false && inputLine.contains("go to") && inputLine.contains("living room")){
+            inLivingRoom = true;
+            inBedroom = false;
+            System.out.println("You have now entered the living room.");
+         }
+
+         if(livingRoom.getBedroomDoor().isLocked == false && inputLine.contains("go to") && inputLine.contains("bedroom")){
+            inLivingRoom = false;
+            inBedroom = true;
+            System.out.println("You have now entered the bedroom.");
+         }
             
 
 
@@ -392,13 +422,13 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(objectRecognized == false){
             System.out.println("There is no such object in this room. Please try again.");
          }
+         if(inLivingRoom == false && inBedroom == false){
+            stillPlaying = false;
+         }
       } while (stillPlaying);
 
-      if(inLivingRoom == false && inBedroom == false){
-         stillPlaying = false;
-         System.out.println("Congrats! You've have escaped the room!");
-         playGame.close();
-      }
+      System.out.println("Congrats! You've have escaped the room!");
+      playGame.close();
    }
 
 }
