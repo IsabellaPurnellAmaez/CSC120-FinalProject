@@ -5,6 +5,9 @@ import java.util.List;
 public class Nightstand extends Storage {
     Key key;
 
+    /**
+     * Constructor for Nightstand class
+     */
     public Nightstand() {
         this.numOfDrawers = 2;
         this.drawerSpecifics = new HashMap<>(); //key: drawer #, value [locked (T/F), foundMessage]
@@ -19,6 +22,10 @@ public class Nightstand extends Storage {
         //2 drawer after key is used locked is T and message is shown
     }
 
+    /**
+     * Method to unlock the second drawer
+     * @param nextLine the input string to check against the key description
+     */
     public void unlock(String nextLine){ //take string from scanner in main
         System.out.println("What key do you want to use?");
         if(nextLine.equals(key.description)){ 

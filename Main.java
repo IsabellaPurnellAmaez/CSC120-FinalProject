@@ -17,10 +17,18 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    private static ArrayList<String> livingRoomObjects = new ArrayList<String>();
    private static ArrayList<String> bedroomObjects = new ArrayList<String>();
 
+   /**
+    * Method to add an item to the inventory
+    * @param item the item being added to the inventory
+    */
    private void inInventory(String item){
       inventory.add(item);
    }
 
+   /**
+    * Getter for inventory
+    * @return the inventory list
+    */
    public ArrayList<String> getInventory(){
       return this.inventory;
    }

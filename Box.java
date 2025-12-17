@@ -5,6 +5,9 @@ public class Box {
     private String checkOutBox;
     public Boolean tryToOpen;
 
+    /**
+     * Constructor for Box class
+     */
     public Box(){
         this.boxCode = "3417";
         this.open = false;
@@ -13,8 +16,9 @@ public class Box {
 
     }
 
-    
-
+    /**
+     * Method to pick up box
+     */
     public void pickUp(){
         System.out.println(checkOutBox);
     }

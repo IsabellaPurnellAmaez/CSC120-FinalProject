@@ -4,6 +4,9 @@ public class Puzzle {
     ArrayList<String> pieces; //array list of puzzle pieces*** 
     Boolean flipped;
 
+    /**
+     * Constructor for Puzzle class
+     */
     public Puzzle(){
         this.pieces = new ArrayList<>();
         for(int i = 1; i <= 3; i++){
@@ -12,10 +15,18 @@ public class Puzzle {
         this.flipped = false;
     }
 
+    /**
+     * Getter for flipped
+     * @return the status of flipped
+     */
     public Boolean getFlipped(){
         return this.flipped;
     }
     
+    /**
+     * Method to place a puzzle piece into the puzzle
+     * @param pieceNumber the number of the piece being placed
+     */
     public void placePiece(String pieceNumber){ // have piece number be some sort of variable in main OR check if piece in pocket instead.***
         if(pieces.contains(pieceNumber)){
             pieces.remove(pieceNumber);
@@ -32,6 +43,9 @@ public class Puzzle {
 
     }
 
+    /**
+     * Method to flip the completed puzzle
+     */
     public void flipPuzzle(){
         if(this.pieces.size() == 0 ){
             System.out.println("You flip the completed puzzle to reveal a hidden message: Look behind the mirror"); // add message

@@ -1,10 +1,16 @@
 public class Mirror {
     boolean hasKey; 
 
+    /**
+     * Constructor for Mirror class
+     */
     public Mirror(){
         this.hasKey = true;
     }
 
+    /**
+     * Method to pick up the key behind the mirror
+     */
     public void pickUp(){// implement exact key
         if(hasKey){
             System.out.println("You have picked up the key from behind the mirror.");

@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class Dresser extends Storage {
 
+    /**
+     * Constructor for Dresser class
+     */
     public Dresser() {
         this.numOfDrawers = 3;
         this.drawerSpecifics = new HashMap<>(); //key: drawer #, value [locked (T/F), foundMessage]

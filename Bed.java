@@ -1,10 +1,16 @@
 public class Bed {
     boolean lifted;
 
+    /**
+     * Constructor for Bed class
+     */
     public Bed(){
         this.lifted = false;
     }
 
+    /**
+     * Method to lift the covers on the bed
+     */
     public void liftCovers(){
         if(!lifted){
             lifted = true; //clueFound = true?
@@ -14,6 +20,9 @@ public class Bed {
         }
     }
 
+    /**
+     * Method to pick up the clue under the covers
+     */
     public void pickUp(){ //pick up the clues*** 
         if(lifted){
             System.out.println("You found a clue under the covers!");
