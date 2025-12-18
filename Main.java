@@ -22,9 +22,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
     * @param item the item being added to the inventory
     */
    private void inInventory(String item){
-      if(!this.inventory.contains(item)){
-         inventory.add(item);
-      }
+      inventory.add(item);
    }
 
    /**
@@ -152,7 +150,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          
          //using the cipher
-         if(((inputLine.contains("use") || inputLine.contains("read") || inputLine.contains("look at")) && inputLine.contains("cipher"))  && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+         if((inputLine.contains("use") && inputLine.contains("cipher"))  && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
             System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
             gameMain.inInventory("book page");
          } 
@@ -176,33 +174,33 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    
 
          //box interaction
-         if(((inLivingRoom == true && livingRoom.getCouch().lifted == true) || gameMain.inventory.contains("box")) && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open") || inputLine.contains("pick up"))){
+         if(inLivingRoom == true && livingRoom.getCouch().lifted == true && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open"))){
             livingRoom.getBox().tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
             while(livingRoom.getBox().tryToOpen){ 
                 if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
                   System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.getBox().tryToOpen = false;
                 } else{
-                  System.out.println("Enter the 4 digit code to open the box: (hint, start with the 3)" + "\n");
+                  System.out.println("Enter the 4 digit code to open the box:" + "\n");
                   String codeTry = playGame.nextLine();
                   if(codeTry.equals(livingRoom.getBox().boxCode)){
                         System.out.println("You've opened the box! Inside is a key.");
                         gameMain.inInventory("key to bedroom");
                         livingRoom.getBox().tryToOpen = false;
                         livingRoom.getBox().open = true;
-                  }  else{
-                        System.out.println("Not quite right, care to try again? \n"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
-                        String endTry = playGame.nextLine().trim();
-                        if (endTry.contains("no")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
-                           livingRoom.getBox().tryToOpen = false;
-                           livingRoom.getBox().open = true;
-                           System.out.println("Ok, now what will you do? \n"); 
-                        } else if (endTry.contains(livingRoom.getBox().boxCode)){
-                           System.out.println("You've opened the box! Inside is a key. \n");
-                           gameMain.inInventory("key to bedroom");
-                           livingRoom.getBox().open = true;
-                           livingRoom.getBox().tryToOpen = false;
-                        }
+                  } else{
+                     System.out.println("Not quite right, care to try again? \n"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
+                     String endTry = playGame.nextLine().trim();
+                     if (endTry.contains("no")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
+                        livingRoom.getBox().tryToOpen = false;
+                        livingRoom.getBox().open = true;
+                        System.out.println("Ok, now what will you do? \n"); 
+                     } else if (endTry.contains(livingRoom.getBox().boxCode)){
+                        System.out.println("You've opened the box! Inside is a key. \n");
+                        gameMain.inInventory("key to bedroom");
+                        livingRoom.getBox().open = true;
+                        livingRoom.getBox().tryToOpen = false;
+                     }
                   }
                }
 
@@ -214,24 +212,33 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You can't see a box here.");
          }
 
-         //key and bedroom door interaction *********not working************
-         if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("pick up")) || (inputLine.contains("unlock") || inputLine.contains("door"))))){
-            gameMain.location = "bedroom door";
+         //key and bedroom door interaction
+         if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
+            System.out.println("You have picked up a door key");
+            gameMain.inInventory("bedroom door key");
+         } else if (inLivingRoom == true && !gameMain.inventory.contains("bedroom door key") && inputLine.contains("key")){
+            System.out.println("You don't have any door keys yet.");
          }
-         if(gameMain.location == "bedroom door"){
-            System.out.println("What door do you want to open? Bedroom or outside. \n");
-            if (inputLine.contains("bedroom")){
+
+         if(inLivingRoom == true && inputLine.contains("go to") && inputLine.contains("door")){
+            System.out.println("Which door do you want to go to? Bedroom or outside");
+            String doorChoice = playGame.nextLine();
+            if (doorChoice.contains("bedroom")){
+               System.out.println("You approach the bedroom door.");
+               gameMain.location = "bedroom door";
+            } else{
+               System.out.println("You approach the outside door.");
+               gameMain.location = "outside door";
+            }
+         }
+
+         if(gameMain.location == "bedroom door" && inputLine.contains("use") && inputLine.contains("key")){
+            if (gameMain.getInventory().contains("bedroom door key")){
                inLivingRoom = false;
                inBedroom = true;
                System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
-            } else if (!inputLine.contains("bedroom")){
-               System.out.println("You don't have the key to this the door yet. Try the other one. \n");
-               String doorChoice = playGame.nextLine();
-               if(doorChoice.contains("bedroom")){
-                  inLivingRoom = false;
-                  inBedroom = true;
-                  System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
-               }
+            } else {
+               System.out.println("You don't have the key to this the door yet. Try the other door. \n");
             }
          }
 
@@ -261,7 +268,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //dresser interaction
 
          if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("go to") || inputLine.contains("look at"))){
-            System.out.println("You are at the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
+            System.out.println("You approach the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
             gameMain.location = "dresser";
          }
 
@@ -297,7 +304,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //bed interaction
 
          if(inBedroom == true && inputLine.contains("bed") && (inputLine.contains("look at") || inputLine.contains("go to"))){
-            System.out.println("You are at the bed.");
+            System.out.println("You approach the bed.");
             gameMain.location = "bed";
          }
 
@@ -330,23 +337,25 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          } 
 
-         if (inLivingRoom == true && gameMain.getInventory().contains("key to outside") && inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("unlock")))){
-            gameMain.location = "outside door";
+         if (inLivingRoom == true && gameMain.getInventory().contains("outside door key") && inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("unlock")))){
+            System.out.println("Which door do you want to go to? Bedroom or outside");
+            String doorChoice = playGame.nextLine();
+            if (doorChoice.contains("bedroom")){
+               System.out.println("You approach the bedroom door.");
+               gameMain.location = "bedroom door";
+            } else{
+               System.out.println("You approach the outside door.");
+               gameMain.location = "outside door";
+            }
          }
+
          if(gameMain.location == "outside door"){
-            System.out.println("What door do you want to open? Bedroom or outside. \n");
-            if (inputLine.contains("outside")){
+            if (gameMain.getInventory().contains("outside door key")){
                inLivingRoom = false;
                inBedroom = false;
                System.out.println("You've unlocked the door and stepped outside!");
-            } else if (!inputLine.contains("outside")){
-               System.out.println("There are no other locked doors\n");
-               String doorChoice = playGame.nextLine();
-               if(doorChoice.contains("bedroom")){
-                  inLivingRoom = false;
-                  inBedroom = false;
-                  System.out.println("You've unlocked the door and stepped outside!");
-               }
+            } else {
+               System.out.println("You don't have the key to this the door yet.\n");
             }
          }
 
@@ -368,9 +377,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
                if(inLivingRoom == true){
-               System.out.println("You are currently in the living room at the " + gameMain.location);
+               System.out.println("You are currently in the living room.");
             } else if (inBedroom == true){
-               System.out.println("You are currently in the bedroom at the " + gameMain.location);
+               System.out.println("You are currently in the bedroom.");
             }
             else{
                System.out.println("You are not in a room. You've escaped!");
