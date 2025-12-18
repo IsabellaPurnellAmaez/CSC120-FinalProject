@@ -214,7 +214,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You don't have any door keys yet.");
          }
 
-         if (inLivingRoom == true && inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("unlock")))){
+         if (inLivingRoom == true && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
             System.out.println("Which door do you want to go to? Bedroom or outside");
             String doorChoice = playGame.nextLine();
             if (doorChoice.contains("bedroom")){
@@ -230,6 +230,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             if (gameMain.getInventory().contains("bedroom door key")){
                inLivingRoom = false;
                inBedroom = true;
+               livingRoom.getBedroomDoor().isLocked = false;
                System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
             } else {
                System.out.println("You don't have the key to this the door yet. Try the other door. \n");
@@ -337,7 +338,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          } 
 
-         if (inLivingRoom == true && inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("unlock")))){
+         if (inLivingRoom == true && inputLine.contains("door ") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
             System.out.println("Which door do you want to go to? Bedroom or outside");
             String doorChoice = playGame.nextLine();
             if (doorChoice.contains("bedroom")){
@@ -348,10 +349,11 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
          }
 
-         if(gameMain.location == "outside door"){
+         if(gameMain.location == "outside door" && inputLine.contains("use") && inputLine.contains("key")){
             if (gameMain.getInventory().contains("outside door key")){
                inLivingRoom = false;
                inBedroom = false;
+               livingRoom.getOutsideDoor().isLocked = false;
                System.out.println("You've unlocked the door and stepped outside!\n");
             } else {
                System.out.println("You don't have the key to this the door yet.\n");
