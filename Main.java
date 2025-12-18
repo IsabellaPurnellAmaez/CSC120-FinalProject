@@ -22,7 +22,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
     * @param item the item being added to the inventory
     */
    private void inInventory(String item){
-      inventory.add(item);
+      if(!this.inventory.contains(item)){
+         inventory.add(item);
+      }
    }
 
    /**
@@ -40,8 +42,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    public static void main (String[] args){
       Main gameMain = new Main();
 
-      Boolean inLivingRoom = false;
-      Boolean inBedroom = true;
+      Boolean inLivingRoom = true;
+      Boolean inBedroom = false;
       Boolean stillPlaying = true;
 
       commands.add("go to");
@@ -150,7 +152,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          
          //using the cipher
-         if((inputLine.contains("use") && inputLine.contains("cipher"))  && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+         if(((inputLine.contains("use") || inputLine.contains("read") || inputLine.contains("look at")) && inputLine.contains("cipher"))  && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
             System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
             gameMain.inInventory("book page");
          } 
@@ -174,14 +176,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    
 
          //box interaction
-         if(inLivingRoom == true && livingRoom.getCouch().lifted == true && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open"))){
+         if(((inLivingRoom == true && livingRoom.getCouch().lifted == true) || gameMain.inventory.contains("box")) && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open") || inputLine.contains("pick up"))){
             livingRoom.getBox().tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
             while(livingRoom.getBox().tryToOpen){ 
                 if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
                   System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.getBox().tryToOpen = false;
                 } else{
-                  System.out.println("Enter the 4 digit code to open the box:" + "\n");
+                  System.out.println("Enter the 4 digit code to open the box: (hint, start with the 3)" + "\n");
                   String codeTry = playGame.nextLine();
                   if(codeTry.equals(livingRoom.getBox().boxCode)){
                         System.out.println("You've opened the box! Inside is a key.");
@@ -212,7 +214,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You can't see a box here.");
          }
 
-         //key and bedroom door interaction
+         //key and bedroom door interaction *********not working************
          if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && (inputLine.contains("use") || (inputLine.contains("pick up")) || (inputLine.contains("unlock") || inputLine.contains("door"))))){
             gameMain.location = "bedroom door";
          }
@@ -259,7 +261,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //dresser interaction
 
          if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("go to") || inputLine.contains("look at"))){
-            System.out.println("You approach the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
+            System.out.println("You are at the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
             gameMain.location = "dresser";
          }
 
@@ -295,7 +297,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          //bed interaction
 
          if(inBedroom == true && inputLine.contains("bed") && (inputLine.contains("look at") || inputLine.contains("go to"))){
-            System.out.println("You approach the bed.");
+            System.out.println("You are at the bed.");
             gameMain.location = "bed";
          }
 
@@ -366,9 +368,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
                if(inLivingRoom == true){
-               System.out.println("You are currently in the living room.");
+               System.out.println("You are currently in the living room at the " + gameMain.location);
             } else if (inBedroom == true){
-               System.out.println("You are currently in the bedroom.");
+               System.out.println("You are currently in the bedroom at the " + gameMain.location);
             }
             else{
                System.out.println("You are not in a room. You've escaped!");
