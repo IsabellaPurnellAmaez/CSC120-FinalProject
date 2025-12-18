@@ -164,11 +164,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
           }
          
           //lift cushions
-         if(gameMain.location == "couch"){
-            if(inputLine.contains("cushion") && (inputLine.contains("pick up")   || inputLine.contains("look under"))){
-               livingRoom.getCouch().pickUpCushions();
-               gameMain.inInventory("box");
-            }
+         if(gameMain.location == "couch" && inputLine.contains("cushion") && (inputLine.contains("pick up")   || inputLine.contains("look under"))){
+            livingRoom.getCouch().pickUpCushions();
+            gameMain.inInventory("box");
          }
         
    
@@ -207,7 +205,6 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
-      
 
          //key and bedroom door interaction
          if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
@@ -281,7 +278,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
             else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
                bedroom.getDresser().open(3);
-            } else if((inputLine.contains("open") || inputLine.contains("look"))){
+            } else{
                System.out.println("Specify which drawer you want to open");
             }
             
@@ -300,7 +297,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
          } else if (inBedroom == false && inputLine.contains("dresser")){
             System.out.println("There is no dresser in this room.");
-         }
+      }
          
             
 
