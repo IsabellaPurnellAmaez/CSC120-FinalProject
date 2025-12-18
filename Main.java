@@ -207,6 +207,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
+      
 
          //key and bedroom door interaction
          if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
@@ -280,7 +281,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             }
             else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
                bedroom.getDresser().open(3);
-            } else{
+            } else if((inputLine.contains("open") || inputLine.contains("look"))){
                System.out.println("Specify which drawer you want to open");
             }
             
