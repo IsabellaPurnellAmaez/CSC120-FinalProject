@@ -13,7 +13,7 @@ public class Mirror {
      */
     public void pickUp(){// implement exact key
         if(hasKey){
-            System.out.println("You have picked up the key from behind the mirror.");
+            System.out.println("You have found a key behind the mirror.");
             hasKey = false;
         } else {
             System.out.println("There is no key behind the mirror."); //you've already picked up the key behind the mirror...
