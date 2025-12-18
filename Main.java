@@ -216,6 +216,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             gameMain.inInventory("bedroom door key");
          } 
 
+         /*
          if (inLivingRoom == true && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
             System.out.println("Which door do you want to go to? Bedroom or outside");
             String doorChoice = playGame.nextLine();
@@ -228,6 +229,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                gameMain.location = "outside door";
             }
          }
+         */
+         
 
          if(gameMain.location == "bedroom door" && inputLine.contains("use") && inputLine.contains("key")){
             if (gameMain.getInventory().contains("bedroom door key")){
