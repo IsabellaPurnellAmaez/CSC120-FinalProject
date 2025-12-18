@@ -440,14 +440,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
          
          for(String object : livingRoomObjects){
-            if(inputLine.contains(object)){
+            if(inputLine.contains(object) && inLivingRoom == true){
                objectRecognized = true;
                break;
-            }
+            } 
          }
 
          for(String object : bedroomObjects){
-            if(inputLine.contains(object)){
+            if(inputLine.contains(object) && inBedroom == true){
                objectRecognized = true;
                break;
             }
