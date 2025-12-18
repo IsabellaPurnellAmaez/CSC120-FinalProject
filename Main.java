@@ -258,6 +258,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
                   bedroom.getNightstand().open(2);
                   gameMain.inInventory("puzzle piece 3");
+                  //if(gameMain.inventory.contains())
                } else {
                System.out.println("Specify which drawer you want to open");
                }
@@ -278,11 +279,14 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if (gameMain.location == "dresser"){
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.getDresser().open(1);
+               gameMain.inInventory("top dresser drawer note: SC");
             } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("middle")){
                bedroom.getDresser().open(2);
+               gameMain.inInventory("middle dresser drawer note: check under the covers of the bed");
             }
             else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
                bedroom.getDresser().open(3);
+               gameMain.inInventory("puzzle piece 2");
             } else{
                System.out.println("Specify which drawer you want to open");
             }
