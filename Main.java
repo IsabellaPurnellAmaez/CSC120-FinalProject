@@ -236,7 +236,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                livingRoom.getBedroomDoor().isLocked = false;
                System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
             } else if (!gameMain.getInventory().contains("bedroom door key")){
-               System.out.println("You don't have the key to this the door yet. Try the other door. \n");
+               System.out.println("You don't have the key to this the door yet.\n");
             }
          }
 
