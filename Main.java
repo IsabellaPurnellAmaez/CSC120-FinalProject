@@ -40,8 +40,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    public static void main (String[] args){
       Main gameMain = new Main();
 
-      Boolean inLivingRoom = false;
-      Boolean inBedroom = true;
+      Boolean inLivingRoom = true;
+      Boolean inBedroom = false;
       Boolean stillPlaying = true;
 
       commands.add("go to");
@@ -150,7 +150,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          
          //using the cipher
-         if((inputLine.contains("use") && inputLine.contains("cipher"))  && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
             System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
             gameMain.inInventory("book page");
          } 
@@ -177,17 +177,17 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(inLivingRoom == true && livingRoom.getCouch().lifted == true && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open"))){
             livingRoom.getBox().tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
             while(livingRoom.getBox().tryToOpen){ 
-                if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
+               if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
                   System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.getBox().tryToOpen = false;
-                } else{
+               } else{
                   System.out.println("Enter the 4 digit code to open the box:" + "\n");
                   String codeTry = playGame.nextLine();
                   if(codeTry.equals(livingRoom.getBox().boxCode)){
-                        System.out.println("You've opened the box! Inside is a key.");
-                        gameMain.inInventory("key to bedroom");
-                        livingRoom.getBox().tryToOpen = false;
-                        livingRoom.getBox().open = true;
+                     System.out.println("You've opened the box! Inside is a key.");
+                     gameMain.inInventory("key to bedroom");
+                     livingRoom.getBox().tryToOpen = false;
+                     livingRoom.getBox().open = true;
                   } else{
                      System.out.println("Not quite right, care to try again? \n"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
                      String endTry = playGame.nextLine().trim();
@@ -203,11 +203,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                      }
                   }
                }
-
             }
-
-
-               
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
