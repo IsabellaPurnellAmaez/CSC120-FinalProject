@@ -100,7 +100,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             gameMain.location = "table";
             System.out.println("you're at the table, there are three cups on top. A red cup, a blue cup, and a green cup.");
          }else if (inLivingRoom == false && inputLine.contains("table")){
-            System.out.println("There is no table in this room.");
+            System.out.println("There is no table in this room.\n");
          }
          
          if(gameMain.location == "table"){
@@ -134,7 +134,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
             gameMain.location = "bookshelf";
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
-            System.out.println("There is no bookshelf in this room.");//no bookshelf in room 
+            System.out.println("There is no bookshelf in this room.\n");//no bookshelf in room 
          } else if (inLivingRoom == true && gameMain.getInventory().contains("book") && inputLine.contains("bookshelf")){
             System.out.println("You've already found the weird looking book, nothing else to see here.");
          }
@@ -239,7 +239,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                livingRoom.getBedroomDoor().isLocked = false;
                System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
             } else if (!gameMain.getInventory().contains("bedroom door key")){
-               System.out.println("\nYou don't have the key to this the door yet.");
+               System.out.println("You don't have the key to this the door yet.");
             }
          }
 
@@ -296,7 +296,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                }
             }  
          } else if (inBedroom == false && inputLine.contains("nightstand")){
-            System.out.println("There is no nightstand in this room.");
+            System.out.println("There is no nightstand in this room.\n");
          }
          
 
@@ -306,9 +306,9 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("You approach the dresser. It has three drawers and a slightly unfinished puzzle on top that's missing three pieces.");
             gameMain.location = "dresser";
          } else if (inBedroom == false && inputLine.contains("puzzle")){
-            System.out.println("There is no puzzle in this room.");
+            System.out.println("There is no puzzle in this room.\n");
          } else if (inBedroom == false && inputLine.contains("dresser")){
-            System.out.println("There is no dresser in this room.");
+            System.out.println("There is no dresser in this room.\n");
          }
 
          if (gameMain.location == "dresser"){
@@ -358,7 +358,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                gameMain.inInventory("bed note: TUK");
                } 
          } else if (inBedroom == false && inputLine.contains("bed")){
-            System.out.println("There is no bed in this room.");
+            System.out.println("There is no bed in this room.\n");
          } 
          
          
@@ -388,30 +388,28 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             gameMain.inInventory("outside door key");
          } 
          
-         if (inLivingRoom == true && !gameMain.location.equals("bedroom door") && inputLine.contains("use") && inputLine.contains("key")){
+         if (inLivingRoom == true && !gameMain.location.equals("bedroom door") && inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
             System.out.println("You cannot use a key without going to a door first.");
-         } else if (inLivingRoom == true && !gameMain.location.equals("outside door") && inputLine.contains("use") && inputLine.contains("key")){
+         } else if (inLivingRoom == true && !gameMain.location.equals("outside door") && inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
             System.out.println("You cannot use a key without going to a door first.");
          }
 
-         if (inLivingRoom == true && inputLine.contains("door ") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
-            if (inputLine.contains("bedroom")){
-               System.out.println("\nYou approach the bedroom door.");
+         if (inLivingRoom == true && inputLine.contains("bedroom") && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
+            System.out.println("You approach the bedroom door.");
+            gameMain.location = "bedroom door";
+         } else if(inLivingRoom == true && inputLine.contains("outside") && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
+            System.out.println("You approach the outside door.");
+            gameMain.location = "outside door";
+         }else if (inLivingRoom == true && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
+            System.out.println("Which door do you want to go to? Bedroom or outside\n");
+            String doorChoice = playGame.nextLine();
+            System.out.println("");
+            if (doorChoice.contains("bedroom")){
+               System.out.println("You approach the bedroom door.");
                gameMain.location = "bedroom door";
-            } else if (inputLine.contains("outside")){
-               System.out.println("\nYou approach the outside door.");
+            } else if (doorChoice.contains("outside")){
+               System.out.println("You approach the outside door.");
                gameMain.location = "outside door";
-            } else {
-               System.out.println("Which door do you want to go to? Bedroom or outside\n");
-               String doorChoice = playGame.nextLine();
-               System.out.println("");
-               if (doorChoice.contains("bedroom")){
-                  System.out.println("\nYou approach the bedroom door.");
-                  gameMain.location = "bedroom door";
-               } else if (doorChoice.contains("outside")){
-                  System.out.println("\nYou approach the outside door.");
-                  gameMain.location = "outside door";
-               }
             }
          }
 
@@ -422,7 +420,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                livingRoom.getOutsideDoor().isLocked = false;
                System.out.println("You've unlocked the door and stepped outside!\n");
             } else if (!gameMain.getInventory().contains("outside door key")){
-               System.out.println("\nYou don't have the key to this the door yet.");
+               System.out.println("You don't have the key to this the door yet.");
             }
          }
 
@@ -501,11 +499,11 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
          
          if(commandRecognized == false){
-            System.out.println("\nYour command is not recognized. Please try again.");
+            System.out.println("\nYour command is not recognized. Please try again.\n");
          }
 
          if(objectRecognized == false){
-            System.out.println("\nThere is no such object in this room. Please try again.");
+            System.out.println("\nThere is no such object in this room. Please try again.\n");
          }
 
          if(inLivingRoom == false && inBedroom == false){
