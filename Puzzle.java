@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Puzzle {
-    ArrayList<String> pieces; //array list of puzzle pieces*** 
+    private ArrayList<String> pieces; //array list of puzzle pieces*** 
     Boolean flipped;
 
     /**
@@ -21,6 +21,11 @@ public class Puzzle {
      */
     public Boolean getFlipped(){
         return this.flipped;
+    }
+
+    public int getNumPieces(){
+        int numPieces = this.pieces.size();
+        return numPieces;
     }
     
     /**
@@ -51,7 +56,7 @@ public class Puzzle {
             System.out.println("You flip the completed puzzle to reveal a hidden message: Look behind the mirror"); // add message
             this.flipped = true;
         } else {
-            System.out.println("The flipped puzzle has a message on it but there are still too many pieces to understand what it says. Go look for more pieces and then try to flip it again.");
+            System.out.println("The flipped puzzle has a message on it but there are still too many pieces missing to understand what it says. Go look for more pieces and then try to flip it again.");
         }
     }
 
