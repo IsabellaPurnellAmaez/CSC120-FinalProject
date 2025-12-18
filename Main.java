@@ -240,7 +240,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //nightstand interaction
          if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("go to") || inputLine.contains("look at"))){
-            System.out.println("You approach the nightstand. It has two drawers.");
+            System.out.println("You are at the nightstand. It has two drawers.");
             gameMain.location = "nightstand";
          }
 
