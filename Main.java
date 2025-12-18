@@ -40,8 +40,8 @@ public class Main { //im wondering if theres a way to make a list of all the obj
    public static void main (String[] args){
       Main gameMain = new Main();
 
-      Boolean inLivingRoom = true;
-      Boolean inBedroom = false;
+      Boolean inLivingRoom = false;
+      Boolean inBedroom = true;
       Boolean stillPlaying = true;
 
       commands.add("go to");
@@ -255,10 +255,40 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                   bedroom.getNightstand().open(1);
                   gameMain.inInventory("puzzle piece 1");
                   gameMain.inInventory("nightstand note");
-               } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
+               }else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
                   bedroom.getNightstand().open(2);
-                  gameMain.inInventory("puzzle piece 3");
-                  //if(gameMain.inventory.contains())
+                  Boolean openNightstand = true;
+                  while(openNightstand){ 
+                     if(!(gameMain.inventory.contains("top dresser drawer note: SC") && gameMain.inventory.contains("bed note: TUK"))){
+                        System.out.println("This drawer needs a 5 letter code to open. You don't have all the information needed to open it yet, keep looking around.");
+                        openNightstand = false;
+                     } else{
+                        System.out.println("Enter the 5 letter code to open the box: " + "\n");
+                        String codeTry = playGame.nextLine();
+                        if(codeTry.equals("stuck")){
+                           System.out.println("You've opened the drawer and found the final puzzle piece");
+                           gameMain.inInventory("puzzle piece 3");
+                           openNightstand = false;
+                        } else{
+                           Boolean stillTrying = true;
+                           while(stillTrying){
+                              System.out.println("Not quite right, care to try again? \n");    
+                              String endTry = playGame.nextLine().trim();
+                              if (endTry.contains("no")){ 
+                                 openNightstand = false;
+                                 System.out.println("Ok, now what will you do? \n"); 
+                                 stillTrying = false;
+                              } else if (endTry.equals("stuck")){
+                                 System.out.println("You've opened the drawer and found the final puzzle piece \n");
+                                 gameMain.inInventory("puzzle piece 3");
+                                 openNightstand = false;
+                                 stillTrying = false;
+                              }
+                           }
+                        }       
+                     }
+                  }
+                  
                } else {
                System.out.println("Specify which drawer you want to open");
                }
@@ -267,8 +297,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
             System.out.println("There is no nightstand in this room.");
          }
          
-           
-      
+
          //dresser interaction
 
          if(inBedroom == true && inputLine.contains("dresser") && (inputLine.contains("go to") || inputLine.contains("look at"))){
@@ -320,7 +349,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(gameMain.location == "bed"){
             if((inputLine.contains("look under") || inputLine.contains("pick up")) && (inputLine.contains("cover") || inputLine.contains("blanket") || inputLine.contains("sheet"))){
                bedroom.getBed().liftCovers();
-               gameMain.inInventory("bed note");
+               gameMain.inInventory("bed note: TUK");
                } 
          } else if (inBedroom == false && inputLine.contains("bed")){
             System.out.println("There is no bed in this room.");

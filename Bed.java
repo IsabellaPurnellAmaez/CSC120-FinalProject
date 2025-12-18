@@ -14,7 +14,7 @@ public class Bed {
     public void liftCovers(){
         if(!lifted){
             lifted = true; //clueFound = true?
-            System.out.println("You have lifted the covers and found a clue! There's a puzzle piece and a piece of paper with the letters 'TUK'..."); // add indication of a clue
+            System.out.println("You have lifted the covers and found a clue! There's a piece of paper with the letters 'TUK'...");  
         } else {
             System.out.println("The covers are already lifted.");
         }
