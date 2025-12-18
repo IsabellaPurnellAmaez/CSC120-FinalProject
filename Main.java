@@ -177,24 +177,28 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //box interaction
          if(((inLivingRoom == true && livingRoom.getCouch().lifted == true) || gameMain.inventory.contains("box")) && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open") || inputLine.contains("pick up"))){
-            livingRoom.getBox().tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
+            livingRoom.getBox().tryToOpen = true;    
             while(livingRoom.getBox().tryToOpen){ 
-                if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
+                if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true && gameMain.inventory.contains("book page"))){
                   System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.getBox().tryToOpen = false;
-                } else{
+               } else{
                   System.out.println("Enter the 4 digit code to open the box: (hint, start with the 3)" + "\n");
                   String codeTry = playGame.nextLine();
                   if(codeTry.equals(livingRoom.getBox().boxCode)){
-                        System.out.println("You've opened the box! Inside is a key.");
-                        gameMain.inInventory("key to bedroom");
-                        livingRoom.getBox().tryToOpen = false;
-                        livingRoom.getBox().open = true;
-                  }  else{
-                        System.out.println("Not quite right, care to try again? \n"); // need a way for them to maybe leave and come back? this whole section needs a lot of work. 
+                     System.out.println("You've opened the box! Inside is a key.");
+                     gameMain.inInventory("key to bedroom");
+                     livingRoom.getBox().tryToOpen = false;
+                     livingRoom.getBox().open = true;
+                  } else{
+                     Boolean stillGuessing = true;
+                     while(stillGuessing){
+                        System.out.println("Not quite right, care to try again? \n");   
                         String endTry = playGame.nextLine().trim();
-                        if (endTry.contains("no")){ //this needs work. Need to slice the string and check for some sort of affirmative/negative statement and then proceed. Also how to do or statements in java? Google said || but that does not seem to be working.
+                        if (endTry.contains("no")){ 
                            livingRoom.getBox().tryToOpen = false;
+                           stillGuessing = false;
+
                            livingRoom.getBox().open = true;
                            System.out.println("Ok, now what will you do? \n"); 
                         } else if (endTry.contains(livingRoom.getBox().boxCode)){
@@ -203,13 +207,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                            livingRoom.getBox().open = true;
                            livingRoom.getBox().tryToOpen = false;
                         }
+                     }       
                   }
                }
-
-                }
-
-
-               
+         }
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("You can't see a box here.");
          }
