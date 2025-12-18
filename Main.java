@@ -393,7 +393,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          if (inLivingRoom == true && inputLine.contains("door ") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
             if (inputLine.contains("bedroom")){
-               System.out.println("\nYou have already unlocked this door.");
+               System.out.println("\nYou approach the bedroom door.");
                gameMain.location = "bedroom door";
             } else if (inputLine.contains("outside")){
                System.out.println("\nYou approach the outside door.");
@@ -403,15 +403,13 @@ public class Main { //im wondering if theres a way to make a list of all the obj
                String doorChoice = playGame.nextLine();
                System.out.println("");
                if (doorChoice.contains("bedroom")){
-                  System.out.println("\nYou have already unlocked this door.");
+                  System.out.println("\nYou approach the bedroom door.");
                   gameMain.location = "bedroom door";
                } else if (doorChoice.contains("outside")){
                   System.out.println("\nYou approach the outside door.");
                   gameMain.location = "outside door";
                }
             }
-         } else if (inBedroom == true && inputLine.contains("door")){
-            System.out.println("There is no locked door in this room.");
          }
 
          if(gameMain.location == "outside door" && inputLine.contains("use") && inputLine.contains("key")){
