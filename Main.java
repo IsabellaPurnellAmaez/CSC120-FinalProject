@@ -217,10 +217,10 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          }
 
          if(inLivingRoom == true && inputLine.contains("go to") && inputLine.contains("door")){
-            System.out.println("Which door do you want to go to? Bedroom or outside");
+            System.out.println("Which door do you want to go to? Bedroom or outside\n");
             String doorChoice = playGame.nextLine();
             if (doorChoice.contains("bedroom")){
-               System.out.println("You approach the bedroom door.");
+               System.out.println("\nYou approach the bedroom door.");
                gameMain.location = "bedroom door";
             } else{
                System.out.println("You approach the outside door.");
@@ -443,6 +443,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
          if(objectRecognized == false){
             System.out.println("There is no such object in this room. Please try again.");
          }
+
          if(inLivingRoom == false && inBedroom == false){
             stillPlaying = false;
          }
