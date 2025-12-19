@@ -7,7 +7,7 @@ public class Table {
      */
     public Table(){
         this.checkedUnder = false;
-        this.message = "You find a piece of paper that seems to be a cipher for the unreadable page in the book.";
+        this.message = "you find a piece of paper that seems to be a cipher for the unreadable page in the book.";
     }
 
     /**
@@ -18,7 +18,7 @@ public class Table {
             System.out.println(message);
             checkedUnder = true;
         }else{
-            System.out.println("You've already looked here. There's nothing else to see.");
+            System.out.println("you've already looked here. There's nothing else to see.");
         }
     }
    

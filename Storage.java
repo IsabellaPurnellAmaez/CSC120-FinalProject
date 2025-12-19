@@ -12,11 +12,9 @@ abstract class Storage {
      */
     public void open(int drawerNum){
         if(drawerSpecifics.get(drawerNum).get(0) == "T"){
-            System.out.println("Drawer " + drawerNum + " is now open.");
             System.out.println(drawerSpecifics.get(drawerNum).get(1));
-            //does drawer need to be an object?? hopefully not
         } else {
-            System.out.println("This drawer is locked.");
+            System.out.println("this drawer is locked.");
         }
         //needs to add key to if statement to unlock
     }

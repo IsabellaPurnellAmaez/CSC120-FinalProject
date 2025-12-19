@@ -21,24 +21,25 @@ public class Bedroom {
      * Constructor for Bedroom class
      */
     public Bedroom(){
-        this.outsideDoorKey = new Key("Outside door");
+        this.outsideDoorKey = new Key("outside door");
     
         this.nightstand = new Nightstand();
         this.dresser = new Dresser();
         this.bed = new Bed();
         this.puzzle = new Puzzle();
         
-        this.puzzlePiece1 = new PuzzlePiece(""); //not sure what the found messages should actually be for these? Just you've picked up the piece?
-        this.puzzlePiece2 = new PuzzlePiece("");
-        this.puzzlePiece3 = new PuzzlePiece("");
+        this.puzzlePiece1 = new PuzzlePiece(); 
+        this.puzzlePiece2 = new PuzzlePiece();
+        this.puzzlePiece3 = new PuzzlePiece();
 
         this.mirror = new Mirror();
 
-        this.roomMessage = "You're in a bedroom with a bed, nightstand, and a dresser with a puzzle on it. There is one door leading to the livingroom.";
+        this.roomMessage = "you're in a bedroom with a bed, nightstand, and a dresser with a puzzle on it. there is one door leading to the living room.";
     }
 
     /**
      * Getter for outsideDoorKey
+     * @return outside door key
      */
     public Key getOutsideDoorKey(){
         return outsideDoorKey;

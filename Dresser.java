@@ -12,13 +12,13 @@ public class Dresser extends Storage {
         this.drawerSpecifics = new HashMap<>(); //key: drawer #, value [locked (T/F), foundMessage]
         
         drawerSpecifics.put(1, (new ArrayList<>())); 
-        drawerSpecifics.get(1).addAll(Arrays.asList("T", "You found a piece of paper that says SC..."));
+        drawerSpecifics.get(1).addAll(Arrays.asList("T", "you found a piece of paper that says SC..."));
 
         drawerSpecifics.put(2, (new ArrayList<>())); 
-        drawerSpecifics.get(2).addAll(Arrays.asList("T", "You found a piece of paper that says to check under the covers of the bed..."));
+        drawerSpecifics.get(2).addAll(Arrays.asList("T", "you found a piece of paper that says to check under the covers of the bed..."));
 
         drawerSpecifics.put(3, (new ArrayList<>())); 
-        drawerSpecifics.get(3).addAll(Arrays.asList("T", "You found a puzzle piece..."));
+        drawerSpecifics.get(3).addAll(Arrays.asList("T", "you found a puzzle piece..."));
     
         
     }
