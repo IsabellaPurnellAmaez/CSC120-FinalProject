@@ -61,12 +61,6 @@ public class Main {
       commands.add("print inventory");
       commands.add("which room am I in");
       commands.add("where am I");
-<<<<<<< HEAD
-      commands.add("help");
-      commands.add("<any instructions given on a note>");
-
-=======
->>>>>>> 376b9c9571364fe81821d28d6a7a8088d14fef5b
 
       //list of objects in the living room
       livingRoomObjects.add("cup");
