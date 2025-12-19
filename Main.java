@@ -60,7 +60,10 @@ public class Main {
       commands.add("look around");
       commands.add("print inventory");
       commands.add("which room am I in");
-      commands.add("Where am I");
+      commands.add("where am I");
+      commands.add("help");
+      commands.add("<any instructions given on a note>");
+
 
       //list of objects in the living room
       livingRoomObjects.add("cup");
@@ -110,13 +113,13 @@ public class Main {
          if(gameMain.location == "table"){
             if(inputLine.contains("pick up") && inputLine.contains("red cup")){
                livingRoom.getRedCup().pickUp();
-               gameMain.inInventory("red cup note");
+               gameMain.inInventory("red cup note: look at the bookshelf");
             } else if(inputLine.contains("pick up") && inputLine.contains("blue cup")){
                livingRoom.getBlueCup().pickUp();
-               gameMain.inInventory("blue cup note");
+               gameMain.inInventory("blue cup note: 4");
             } else if(inputLine.contains("pick up") && inputLine.contains("green cup")){
                livingRoom.getGreenCup().pickUp();
-               gameMain.inInventory("green cup note");
+               gameMain.inInventory("green cup note: 7");
             } else if( inputLine.contains("look under") && inputLine.contains("table")){ //get the cipher 
                if(gameMain.inventory.contains("book")){
                 livingRoom.getTable().readMessage();
@@ -130,8 +133,9 @@ public class Main {
          //using the cipher
          if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
             System.out.println("you can now read the page in the book. it has two numbers on it: 3 and 1. it also says to look under the couch cushions..."); //cipher to read book
-            gameMain.inInventory("book page");
+            gameMain.inInventory("book page: 3, 1. look under couch cushion");
          } 
+
          
          //bookshelf interaction
          if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet.
@@ -149,7 +153,7 @@ public class Main {
          //pick up book
          if(gameMain.location == "bookshelf"){
             if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
-               gameMain.inInventory("book"); //put down book?
+               gameMain.inInventory("book: check under table"); //put down book?
                livingRoom.getBookshelf().pickUpBook();
             } 
          } 
@@ -221,7 +225,7 @@ public class Main {
                if(inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                   bedroom.getNightstand().open(1);
                   gameMain.inInventory("puzzle piece 1");
-                  gameMain.inInventory("nightstand note");
+                  gameMain.inInventory("nightstand note: 'look in dresser'");
                }else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("bottom")){
                   bedroom.getNightstand().open(2);
                   Boolean openNightstand = true;
@@ -441,6 +445,14 @@ public class Main {
             } else{
                System.out.println("you've escaped the house!");
             }
+         }
+
+         if(inputLine.contains("help")){
+            System.out.println("****************************\nPOSSIBLE COMMANDS:\n****************************");
+            for(String commands : commands){
+               System.out.println("- " +commands);
+            }
+            System.out.println( "****************************\n");
          }
 
          //print inventory
