@@ -43,6 +43,6 @@
 
       **YES** Methods avoid confusing side effects.
 
-_____ 1 pt: All required files included with submission (including completed checklist file).
+**YES** 1 pt: All required files included with submission (including completed checklist file).
 
 **YES** 1 pt: `readme.md` contains your reflection on the project and responses to all prompts .
