@@ -30,13 +30,27 @@ Note:  It's a good idea to also make this list available inside the game, in res
 - open box (code is 3417)
 - pick up key
 - go to bedroom door OR go to door (respond to question given with bedroom)
+
 - use key to bedroom
 - go to nighstand 
     - open first drawer
 - go to dresser
     - open all drawers 
+- go to bed
+    - lift covers
+- go to nightstand
+    - unlock bottom drawer
+- go to dresser
+    - place all puzzle pieces into the puzzle
+    - flip puzzle
+- go to mirror
+    - look behind mirror
+    - get key
+- go to outside door
+    - open door and win game
 
 
 
 If your game includes challenges that must be overcome to win, also list them below.
 
+    All of the spoiler alert steps need to be done sequentially. 
