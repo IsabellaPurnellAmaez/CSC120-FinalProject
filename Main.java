@@ -60,7 +60,7 @@ public class Main {
       commands.add("look around");
       commands.add("print inventory");
       commands.add("which room am I in");
-      commands.add("Where am I");
+      commands.add("where am I");
 
       //list of objects in the living room
       livingRoomObjects.add("cup");
