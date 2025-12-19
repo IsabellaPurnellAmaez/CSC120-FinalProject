@@ -18,9 +18,9 @@ public class LivingRoom {
      * Constructor for LivingRoom class
      */
     public LivingRoom(){
-        this.redCup = new Cup("Inside the red cup is a piece of paper. On it is a note: 'Look at the bookshelf'");
-        this.blueCup = new Cup("Inside the blue cup is a piece of paper with the number '4' on it");
-        this.greenCup = new Cup("Inside the green cup is a piece of paper with the number '7' on it");
+        this.redCup = new Cup("inside the red cup is a piece of paper. on it is a note: 'look at the bookshelf'");
+        this.blueCup = new Cup("inside the blue cup is a piece of paper with the number '4' on it");
+        this.greenCup = new Cup("inside the green cup is a piece of paper with the number '7' on it");
 
         this.bookshelf = new Bookshelf();
         this.table = new Table();
