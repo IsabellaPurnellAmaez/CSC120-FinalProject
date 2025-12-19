@@ -17,4 +17,18 @@ Note:  It's a good idea to also make this list available inside the game, in res
 
 # SPOILER ALERT
 
+- go to table
+    - pick up red cup, blue cup, green cup
+- go to bookshelf
+    - look at book
+- go to table
+    - look under table
+- use cipher
+- go to couch
+    - look under cushions
+- open box (code is 3417)
+- pick up key
+- go to bedroom door OR go to door (respond to question given with bedroom)
+- use key
+
 If your game includes challenges that must be overcome to win, also list them below.
