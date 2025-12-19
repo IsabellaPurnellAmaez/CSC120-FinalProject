@@ -185,7 +185,7 @@ public class Main {
                         livingRoom.getBox().open = true;
                      } else{
                         Boolean stillTrying = true;
-                        while(stillTrying){
+                        while(stillTrying){ //loop to keep trying codes 
                            System.out.println("\nnot quite right, care to try again? \n");    
                            String endTry = playGame.nextLine().trim();
                            if (endTry.contains("no")){ 
@@ -204,29 +204,9 @@ public class Main {
                }
             }
          } else if (inLivingRoom == false && inputLine.contains("box") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            System.out.println("You can't see a box here.");
+            System.out.println("you can't see a box here.");
          }
 
-         //key and bedroom door interaction
-         if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
-            System.out.println("You have picked up a door key");
-            gameMain.inInventory("bedroom door key");
-         } 
-
-         
-
-         if(gameMain.location == "bedroom door" && inputLine.contains("use") && inputLine.contains("key")){
-            if (gameMain.getInventory().contains("bedroom door key")){
-               inLivingRoom = false;
-               inBedroom = true;
-               livingRoom.getBedroomDoor().isLocked = false;
-               System.out.println("You have now entered the bedroom. In here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
-            } else if (!gameMain.getInventory().contains("bedroom door key")){
-               System.out.println("You don't have the key to this the door yet.");
-            }
-         }
-
-         //-----------
 
          //nightstand interaction
          if(inBedroom == true && inputLine.contains("nightstand") && (inputLine.contains("go to") || inputLine.contains("look at"))){
@@ -234,6 +214,7 @@ public class Main {
             gameMain.location = "nightstand";
          }
 
+         //opening the nightstand drawer
          if(gameMain.location == "nightstand"){
             if(inputLine.contains("open") || inputLine.contains("look at")){
                if(inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
@@ -294,6 +275,7 @@ public class Main {
             System.out.println("There is no dresser in this room.\n");
          }
 
+         //opening dresser drawers
          if (gameMain.location == "dresser"){
             if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.getDresser().open(1);
@@ -309,6 +291,7 @@ public class Main {
                System.out.println("Specify which drawer you want to open");
             }
             
+            //placing puzzle pieces
             if(((inputLine.contains("place")|| inputLine.contains("put")) && inputLine.contains("piece")) || (inputLine.contains("finish") && inputLine.contains("puzzle") )){
                if(gameMain.inventory.contains("puzzle piece 1")){
                   bedroom.getPuzzle().placePiece("puzzle piece 1");
@@ -321,20 +304,19 @@ public class Main {
                }
             }
 
+            //flipping the puzzle
             if(inputLine.contains("flip")){  
                bedroom.getPuzzle().flipPuzzle();
             }
          }
          
-            
-
          //bed interaction
-
          if(inBedroom == true && inputLine.contains("bed") && !inputLine.contains("bedroom") && (inputLine.contains("look at") || inputLine.contains("go to"))){
             System.out.println("You approach the bed.");
             gameMain.location = "bed";
          }
 
+         //look under bed
          if(gameMain.location == "bed"){
             if((inputLine.contains("look under") || inputLine.contains("pick up")) && (inputLine.contains("cover") || inputLine.contains("blanket") || inputLine.contains("sheet"))){
                bedroom.getBed().liftCovers();
@@ -343,19 +325,15 @@ public class Main {
          } else if (inBedroom == false && inputLine.contains("bed") && !inputLine.contains("bedroom")){
             System.out.println("There is no bed in this room.\n");
          } 
-         
-         
-
-
-         
+          
 
          //mirror interaction
-      
          if(inputLine.contains("mirror") && (inputLine.contains("go to") || inputLine.contains("approach") || inputLine.contains("look at"))){
             System.out.println("you're now standing in front of the mirror");
             gameMain.location = "mirror";
          }
 
+         //look behind mirror
          if(gameMain.location == "mirror"){
             if(!bedroom.getPuzzle().getFlipped()){
                System.out.println("something looks off about the mirror to you but you can't quite tell what...keep looking around the room");
@@ -364,11 +342,27 @@ public class Main {
             }
          }
             
-         
+         //picking up bedroom door key
+         if (inLivingRoom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
+            System.out.println("you have picked up a door key");
+            gameMain.inInventory("bedroom door key");
+         } 
+
+         //using bedroom door key
+         if(gameMain.location == "bedroom door" && inputLine.contains("use") && inputLine.contains("key")){
+            if (gameMain.getInventory().contains("bedroom door key")){
+               inLivingRoom = false;
+               inBedroom = true;
+               livingRoom.getBedroomDoor().isLocked = false;
+               System.out.println("you have now entered the bedroom. in here there's a bed, a nightstand, a mirror and a dresser with a puzzle on it");
+            } else if (!gameMain.getInventory().contains("bedroom door key")){
+               System.out.println("you don't have the key to this the door yet.");
+            }
+         }
 
          //keys and doors
-         if (inBedroom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
-            System.out.println("You have picked up a door key");
+         if (inBedroom == true && bedroom.getMirror().getHasKey() == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
+            System.out.println("you have picked up a door key");
             gameMain.inInventory("outside door key");
          } 
          

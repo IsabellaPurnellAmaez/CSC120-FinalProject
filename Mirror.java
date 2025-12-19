@@ -1,11 +1,19 @@
 public class Mirror {
-    boolean hasKey; 
+    private Boolean hasKey; 
 
     /**
      * Constructor for Mirror class
      */
     public Mirror(){
-        this.hasKey = true;
+        this.hasKey = false;
+    }
+
+    /**
+     * getter for hasKey attribute
+     */
+
+    public Boolean getHasKey(){
+        return this.hasKey;
     }
 
     /**
@@ -14,7 +22,7 @@ public class Mirror {
     public void pickUp(){// implement exact key
         if(hasKey){
             System.out.println("You have found a key behind the mirror.");
-            hasKey = false;
+            hasKey = true;
         } else {
             System.out.println("There is no key behind the mirror."); //you've already picked up the key behind the mirror...
         }
