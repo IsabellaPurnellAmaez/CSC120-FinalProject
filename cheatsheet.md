@@ -37,7 +37,7 @@ Note:  It's a good idea to also make this list available inside the game, in res
 - go to dresser
     - open all drawers 
 - go to bed
-    - lift covers
+    - look under covers
 - go to nightstand
     - unlock bottom drawer
 - go to dresser

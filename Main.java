@@ -136,7 +136,7 @@ public class Main {
 
          
          //bookshelf interaction
-         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet.
+         if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note: look at the bookshelf")){ //what about approaching the bookshelf if you haven't been to the cups yet.
             System.out.println("you're at the bookshelf. you notice there's one book that has it's spine turned in.");
             gameMain.location = "bookshelf";
          } else if(inLivingRoom == true && inputLine.contains("bookshelf") &&  inputLine.contains("go to")){
