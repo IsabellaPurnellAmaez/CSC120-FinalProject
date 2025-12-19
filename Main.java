@@ -277,22 +277,22 @@ public class Main {
 
          //opening dresser drawers
          if (gameMain.location == "dresser"){
-            if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
+            if((inputLine.contains("open") ) && inputLine.contains("1") || inputLine.contains("first") || inputLine.contains("one") || inputLine.contains("top")){
                bedroom.getDresser().open(1);
                gameMain.inInventory("top dresser drawer note: SC");
-            } else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("middle")){
+            } else if((inputLine.contains("open") ) && inputLine.contains("2") || inputLine.contains("second") || inputLine.contains("two") || inputLine.contains("middle")){
                bedroom.getDresser().open(2);
                gameMain.inInventory("middle dresser drawer note: check under the covers of the bed");
             }
-            else if((inputLine.contains("open") || inputLine.contains("look")) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
+            else if((inputLine.contains("open") ) && inputLine.contains("3") || inputLine.contains("third") || inputLine.contains("three") || inputLine.contains("bottom")){
                bedroom.getDresser().open(3);
                gameMain.inInventory("puzzle piece 2");
-            } else if ((inputLine.contains("open") || inputLine.contains("look"))){
+            } else if ((inputLine.contains("open")  )){
                System.out.println("Specify which drawer you want to open");
             }
             
             //placing puzzle pieces
-            if(((inputLine.contains("place")|| inputLine.contains("put")) && inputLine.contains("piece")) || (inputLine.contains("finish") && inputLine.contains("puzzle") )){
+            if(((inputLine.contains("place")|| inputLine.contains("put") || inputLine.contains("use")) && inputLine.contains("piece")) || (inputLine.contains("finish") && inputLine.contains("puzzle") )){
                if(gameMain.inventory.contains("puzzle piece 1")){
                   bedroom.getPuzzle().placePiece("puzzle piece 1");
                }
@@ -403,13 +403,14 @@ public class Main {
             }
          }
 
-         
+         //going into living room from bedroom
          if(livingRoom.getBedroomDoor().isLocked == false && inputLine.contains("go to") && inputLine.contains("living room")){
             inLivingRoom = true;
             inBedroom = false;
             System.out.println("You have now entered the living room.");
          }
 
+         //going into bedroom from livingroom
          if(livingRoom.getBedroomDoor().isLocked == false && inputLine.contains("go to") && inputLine.contains("bedroom")){
             inLivingRoom = false;
             inBedroom = true;
@@ -418,12 +419,11 @@ public class Main {
 
 
          //room location check
-
          if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
                if(inLivingRoom == true){
-               System.out.println("You are currently in the living room.");
+               System.out.println("You are currently in the living room by the " + gameMain.location);
             } else if (inBedroom == true){
-               System.out.println("You are currently in the bedroom.");
+               System.out.println("You are currently in the bedroomby the " + gameMain.location);
             }
             else{
                System.out.println("You are not in a room. You've escaped!");
@@ -447,11 +447,9 @@ public class Main {
             System.out.println("****************************");
             System.out.println("INVENTORY:");
             System.out.println("****************************");
-
             for(String item : gameMain.getInventory()){
                System.out.println("- " + item);
             }
-            
             System.out.println("****************************");
          } else if(inputLine.contains("print inventory") && gameMain.getInventory().size() == 0){
             System.out.println("Your inventory is empty.");
@@ -464,33 +462,35 @@ public class Main {
             }
          }
          
-         for(String object : livingRoomObjects){
+         for(String object : livingRoomObjects){ //converts the list of livingRoomObjects into a string and checks if the inputLine contains any of them
             if(inputLine.contains(object) && inLivingRoom == true){
                objectRecognized = true;
                break;
             } 
          }
 
-         for(String object : bedroomObjects){
+         for(String object : bedroomObjects){ //converts the list of bedroomObjects into a string and checks if the inputLine contains any of them
             if(inputLine.contains(object) && inBedroom == true){
                objectRecognized = true;
                break;
             }
          }
          
-         if(commandRecognized == false){
+         if(commandRecognized == false){ //check if command exists
             System.out.println("\nYour command is not recognized. Please try again.\n");
          }
 
-         if(objectRecognized == false){
+         if(objectRecognized == false){ //check if object exists
             System.out.println("\nThere is no such object in this room. Please try again.\n");
          }
 
+         //end game when not in a room
          if(inLivingRoom == false && inBedroom == false){
             stillPlaying = false;
          }
       } while (stillPlaying);
 
+      //you win!
       System.out.println("Congrats! You've have escaped the room!");
       playGame.close();
    }
