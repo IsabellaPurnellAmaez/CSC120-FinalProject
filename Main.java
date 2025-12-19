@@ -2,18 +2,21 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 
-public class Main { //im wondering if theres a way to make a list of all the objects in each room. That way if someone is trying to go to an object it first checks that they're in the appropriate room first? I think it'd be more efficient to do that in main rather than have each object have a Boolean attribute that's 'inLivingRoom' or 'inBedroom'...
-
+public class Main { 
+   
+   //set up the rooms:
    static LivingRoom livingRoom = new LivingRoom();
    static Bedroom bedroom = new Bedroom();
 
-   private ArrayList<String> inventory = new ArrayList<String>();
-   private String location = ""; //string that says where you are. If you're already in a location you don't have to say "go to" like for cups? 
+   private ArrayList<String> inventory = new ArrayList<String>(); //string of all the objects you've already collected
+   private String location = ""; //string that says where you are. *********in "where am i" add location in room**********
 
+   //valid commands and objects that the user can say
    private static ArrayList<String> commands = new ArrayList<String>();
    private static boolean commandRecognized = false;
    private static boolean objectRecognized = false;
 
+   //objects in the rooms
    private static ArrayList<String> livingRoomObjects = new ArrayList<String>();
    private static ArrayList<String> bedroomObjects = new ArrayList<String>();
 
@@ -347,7 +350,7 @@ public class Main { //im wondering if theres a way to make a list of all the obj
 
          //bed interaction
 
-         if(inBedroom == true && inputLine.contains("bed") && (inputLine.contains("look at") || inputLine.contains("go to"))){
+         if(inBedroom == true && inputLine.contains("bed") && !inputLine.contains("bedroom") && (inputLine.contains("look at") || inputLine.contains("go to"))){
             System.out.println("You approach the bed.");
             gameMain.location = "bed";
          }
