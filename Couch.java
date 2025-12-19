@@ -1,13 +1,21 @@
 public class Couch {
-    public Boolean lifted;
+    private Boolean lifted;
     private String liftedMessage = "No found message written";
 
     /**
      * Constructor for Couch class
      */
     public Couch(){
-        this.liftedMessage = "Underneath the couch cushions is a small black box with a lock on it.";
+        this.liftedMessage = "underneath the couch cushions is a small black box with a lock on it.";
         this.lifted = false;
+    }
+
+     /**
+     * getter for lifted
+     * @return whether or not the couch cushion has been lifted
+     */
+    public Boolean getLifted(){
+        return this.lifted;
     }
 
     /**
@@ -18,7 +26,7 @@ public class Couch {
             System.out.println(this.liftedMessage);
             this.lifted = true;
         } else{
-            System.out.println("You've already checked under the cushions. Underneath the couch cushions is a small black box with a lock on it.");
+            System.out.println("you've already checked under the cushions. underneath the couch cushions is a small black box with a lock on it.");
         }
     }
     

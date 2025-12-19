@@ -14,6 +14,9 @@ public class LivingRoom {
 
     private String roomMessage;
 
+    /**
+     * Constructor for LivingRoom class
+     */
     public LivingRoom(){
         this.redCup = new Cup("Inside the red cup is a piece of paper. On it is a note: 'Look at the bookshelf'");
         this.blueCup = new Cup("Inside the blue cup is a piece of paper with the number '4' on it");

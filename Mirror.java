@@ -10,6 +10,7 @@ public class Mirror {
 
     /**
      * getter for hasKey attribute
+     * @return whether you have the key or not
      */
 
     public Boolean getHasKey(){
@@ -21,10 +22,10 @@ public class Mirror {
      */
     public void pickUp(){// implement exact key
         if(!hasKey){
-            System.out.println("You have found a key behind the mirror.");
+            System.out.println("you have found a key behind the mirror.");
             hasKey = true;
         } else {
-            System.out.println("There is no key behind the mirror."); //you've already picked up the key behind the mirror...
+            System.out.println("there is no key behind the mirror."); //you've already picked up the key behind the mirror...
         }
     }
 }

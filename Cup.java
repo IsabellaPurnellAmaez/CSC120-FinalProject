@@ -1,7 +1,7 @@
 public class Cup{
     
     private String foundMessage;
-    public Boolean foundCup;
+    private Boolean foundCup;
 
     /**
      * Constructor for Cup class
@@ -10,6 +10,14 @@ public class Cup{
     public Cup(String foundMessage){
         this.foundMessage = foundMessage;
         this.foundCup = false;
+    }
+
+    /**
+     * getter for foundCup boolean
+     * @return found cup 
+     */
+    public Boolean getFoundCup(){
+        return this.foundCup;
     }
 
     /**
