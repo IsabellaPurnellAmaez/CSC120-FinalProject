@@ -369,6 +369,7 @@ public class Main {
          //checking you're at a door before you try to unlock one
          if (inLivingRoom == true && !gameMain.location.equals("bedroom door") && !gameMain.location.equals("outside door") &&  inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
             System.out.println("you cannot use a key without going to a door first.");
+         }
        
          //approaching a door
          if (inLivingRoom == true && inputLine.contains("bedroom") && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
