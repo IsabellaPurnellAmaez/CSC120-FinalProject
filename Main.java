@@ -56,7 +56,6 @@ public class Main {
       commands.add("look at");
       commands.add("look under");
       commands.add("look behind");
-      commands.add("flip");
       commands.add("look around");
       commands.add("print inventory");
       commands.add("which room am I in");
