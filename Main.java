@@ -360,37 +360,37 @@ public class Main {
             }
          }
 
-         //keys and doors
+         //pick up key behind mirror
          if (inBedroom == true && bedroom.getMirror().getHasKey() == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
             System.out.println("you have picked up a door key");
             gameMain.inInventory("outside door key");
          } 
          
-         if (inLivingRoom == true && !gameMain.location.equals("bedroom door") && inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
-            System.out.println("You cannot use a key without going to a door first.");
-         } else if (inLivingRoom == true && !gameMain.location.equals("outside door") && inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
-            System.out.println("You cannot use a key without going to a door first.");
-         }
-
+         //checking you're at a door before you try to unlock one
+         if (inLivingRoom == true && !gameMain.location.equals("bedroom door") && !gameMain.location.equals("outside door") &&  inputLine.contains("use") && inputLine.contains("key") && gameMain.getInventory().contains("bedroom door key")){
+            System.out.println("you cannot use a key without going to a door first.");
+       
+         //approaching a door
          if (inLivingRoom == true && inputLine.contains("bedroom") && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
-            System.out.println("You approach the bedroom door.");
+            System.out.println("you approach the bedroom door.");
             gameMain.location = "bedroom door";
          } else if(inLivingRoom == true && inputLine.contains("outside") && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
-            System.out.println("You approach the outside door.");
+            System.out.println("you approach the outside door.");
             gameMain.location = "outside door";
          }else if (inLivingRoom == true && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
-            System.out.println("Which door do you want to go to? Bedroom or outside\n");
+            System.out.println("which door do you want to go to? Bedroom or outside\n");
             String doorChoice = playGame.nextLine();
             System.out.println("");
             if (doorChoice.contains("bedroom")){
-               System.out.println("You approach the bedroom door.");
+               System.out.println("you approach the bedroom door.");
                gameMain.location = "bedroom door";
             } else if (doorChoice.contains("outside")){
-               System.out.println("You approach the outside door.");
+               System.out.println("you approach the outside door.");
                gameMain.location = "outside door";
             }
          }
 
+         //leaving the room with outside door key
          if(gameMain.location == "outside door" && inputLine.contains("use") && inputLine.contains("key")){
             if (gameMain.getInventory().contains("outside door key")){
                inLivingRoom = false;
@@ -402,6 +402,7 @@ public class Main {
             }
          }
 
+         
          if(livingRoom.getBedroomDoor().isLocked == false && inputLine.contains("go to") && inputLine.contains("living room")){
             inLivingRoom = true;
             inBedroom = false;
