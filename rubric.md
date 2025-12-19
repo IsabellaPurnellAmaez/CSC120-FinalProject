@@ -23,7 +23,7 @@
 
 **YES** 2 pts: The project's design is **extensible** (i.e. someone else could pick up where you left off, adding on or modifying the game without requiring a total rewrite).
 
-_____ 2 pts: Submission includes an **architecture diagram** describing the relationships between all classes.
+**YES** 2 pts: Submission includes an **architecture diagram** describing the relationships between all classes.
 
 
 ## General Items (10 pts):
@@ -43,6 +43,6 @@ _____ 2 pts: Submission includes an **architecture diagram** describing the rela
 
       **YES** Methods avoid confusing side effects.
 
-_____ 1 pt: All required files included with submission (including completed checklist file).
+**YES** 1 pt: All required files included with submission (including completed checklist file).
 
 **YES** 1 pt: `readme.md` contains your reflection on the project and responses to all prompts .
