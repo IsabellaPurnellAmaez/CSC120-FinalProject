@@ -30,7 +30,13 @@ Note:  It's a good idea to also make this list available inside the game, in res
 - open box (code is 3417)
 - pick up key
 - go to bedroom door OR go to door (respond to question given with bedroom)
-- use key
+- use key to bedroom
+- go to nighstand 
+    - open first drawer
+- go to dresser
+    - open all drawers 
+
+
 
 If your game includes challenges that must be overcome to win, also list them below.
 

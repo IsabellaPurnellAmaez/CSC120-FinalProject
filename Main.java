@@ -89,7 +89,7 @@ public class Main {
          System.out.println("- " +commands);
       }
       System.out.println( "****************************\n");
-      System.out.println("\nyou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. both are locked. inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
+      System.out.println("\nyou are locked inside a room. the room has two doors, the one you entered through and another that\nyou don't know where it leads. both are locked. inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
       
@@ -118,7 +118,7 @@ public class Main {
                livingRoom.getGreenCup().pickUp();
                gameMain.inInventory("green cup note: 7");
             } else if( inputLine.contains("look under") && inputLine.contains("table")){ //get the cipher 
-               if(gameMain.inventory.contains("book")){
+               if(gameMain.inventory.contains("book: check under table")){
                 livingRoom.getTable().readMessage();
                 gameMain.inInventory("cipher");
                } else {
@@ -128,7 +128,7 @@ public class Main {
          }
 
          //using the cipher
-         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book: check under table")){
             System.out.println("you can now read the page in the book. it has two numbers on it: 3 and 1. it also says to look under the couch cushions..."); //cipher to read book
             gameMain.inInventory("book page: 3, 1. look under couch cushion");
          } 
