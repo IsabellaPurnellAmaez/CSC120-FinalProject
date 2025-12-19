@@ -43,10 +43,12 @@ public class Main {
    public static void main (String[] args){
       Main gameMain = new Main();
 
+      //starting location and boolean of whether you're still playing or not
       Boolean inLivingRoom = true;
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
 
+      
       commands.add("go to");
       commands.add("pick up");
       commands.add("use");
@@ -219,20 +221,6 @@ public class Main {
             gameMain.inInventory("bedroom door key");
          } 
 
-         /*
-         if (inLivingRoom == true && inputLine.contains("door") && (inputLine.contains("go to") || (inputLine.contains("unlock")))){
-            System.out.println("Which door do you want to go to? Bedroom or outside\n");
-            String doorChoice = playGame.nextLine();
-            System.out.println("");
-            if (doorChoice.contains("bedroom")){
-               System.out.println("\nYou approach the bedroom door.");
-               gameMain.location = "bedroom door";
-            } else if (doorChoice.contains("outside")){
-               System.out.println("\nYou approach the outside door.");
-               gameMain.location = "outside door";
-            }
-         }
-         */
          
 
          if(gameMain.location == "bedroom door" && inputLine.contains("use") && inputLine.contains("key")){
@@ -360,7 +348,7 @@ public class Main {
                bedroom.getBed().liftCovers();
                gameMain.inInventory("bed note: TUK");
                } 
-         } else if (inBedroom == false && inputLine.contains("bed")){
+         } else if (inBedroom == false && inputLine.contains("bed") && !inputLine.contains("bedroom")){
             System.out.println("There is no bed in this room.\n");
          } 
          
@@ -386,6 +374,7 @@ public class Main {
             
          
 
+         //keys and doors 
          if (inBedroom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
             System.out.println("You have picked up a door key");
             gameMain.inInventory("outside door key");
