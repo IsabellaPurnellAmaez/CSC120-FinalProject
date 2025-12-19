@@ -20,7 +20,7 @@ public class Mirror {
      * Method to pick up the key behind the mirror
      */
     public void pickUp(){// implement exact key
-        if(hasKey){
+        if(!hasKey){
             System.out.println("You have found a key behind the mirror.");
             hasKey = true;
         } else {
