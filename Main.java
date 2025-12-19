@@ -48,7 +48,7 @@ public class Main {
       Boolean inBedroom = false;
       Boolean stillPlaying = true;
 
-      
+      //list of valid commands
       commands.add("go to");
       commands.add("pick up");
       commands.add("use");
@@ -61,6 +61,7 @@ public class Main {
       commands.add("which room am I in");
       commands.add("Where am I");
 
+      //list of objects in the living room
       livingRoomObjects.add("cup");
       livingRoomObjects.add("table");
       livingRoomObjects.add("book");
@@ -72,6 +73,7 @@ public class Main {
       livingRoomObjects.add("bedroom door");
       livingRoomObjects.add("outside door");
 
+      //list of objects in the bedroom
       bedroomObjects.add("bed");
       bedroomObjects.add("nightstand");
       bedroomObjects.add("dresser");
@@ -80,34 +82,30 @@ public class Main {
       bedroomObjects.add("key"); // outside door key
 
 
-      
+      //starting game messages. Prints out all the valid commands and then the game introductions
       System.out.println("****************************\nPOSSIBLE COMMANDS:\n****************************");
       for(String commands : commands){
          System.out.println("- " +commands);
       }
       System.out.println( "****************************\n");
-      System.out.println("\nYou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. Both are locked. Inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
+      System.out.println("\nyou are locked inside a room. The room has two doors, the one you entered through and another that\nyou don't know where it leads. both are locked. inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
       Scanner playGame = new Scanner(System.in);
       String inputLine = "";
       
       do{
          System.out.println("");
-         inputLine = playGame.nextLine().toLowerCase();
+         inputLine = playGame.nextLine().toLowerCase(); //convert all input strings to lower case 
          System.out.println("");
-
-         
-
-        
-
     
          //table/cup interaction
-         if(inLivingRoom == true  &&  inputLine.contains("go to") && (inputLine.contains("table") || inputLine.contains("cup"))){
+         if(inLivingRoom == true  &&  inputLine.contains("go to") && (inputLine.contains("table") || inputLine.contains("cup"))){ //going to the table
             gameMain.location = "table";
-            System.out.println("you're at the table, there are three cups on top. A red cup, a blue cup, and a green cup.");
-         }else if (inLivingRoom == false && inputLine.contains("table")){
-            System.out.println("There is no table in this room.\n");
+            System.out.println("you're at the table, there are three cups on top. a red cup, a blue cup, and a green cup.");
+         } else if (inLivingRoom == false && inputLine.contains("table")){
+            System.out.println("there is no table in this room.\n");
          }
          
+         //pick up cups 
          if(gameMain.location == "table"){
             if(inputLine.contains("pick up") && inputLine.contains("red cup")){
                livingRoom.getRedCup().pickUp();
@@ -118,7 +116,7 @@ public class Main {
             } else if(inputLine.contains("pick up") && inputLine.contains("green cup")){
                livingRoom.getGreenCup().pickUp();
                gameMain.inInventory("green cup note");
-            } else if( inputLine.contains("look under") && inputLine.contains("table")){
+            } else if( inputLine.contains("look under") && inputLine.contains("table")){ //get the cipher 
                if(gameMain.inventory.contains("book")){
                 livingRoom.getTable().readMessage();
                 gameMain.inInventory("cipher");
@@ -128,22 +126,26 @@ public class Main {
             } 
          }
 
-
-         
+         //using the cipher
+         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
+            System.out.println("you can now read the page in the book. it has two numbers on it: 3 and 1. it also says to look under the couch cushions..."); //cipher to read book
+            gameMain.inInventory("book page");
+         } 
          
          //bookshelf interaction
          if(inLivingRoom == true &&  inputLine.contains("bookshelf") && inputLine.contains("go to") && gameMain.getInventory().contains("red cup note")){ //what about approaching the bookshelf if you haven't been to the cups yet.
-            System.out.println("You're at the bookshelf. You notice there's one book that has it's spine turned in.");
+            System.out.println("you're at the bookshelf. you notice there's one book that has it's spine turned in.");
             gameMain.location = "bookshelf";
          } else if(inLivingRoom == true && inputLine.contains("bookshelf") &&  inputLine.contains("go to")){
-            System.out.println("Bookshelf looks weird, we dont know why. Keep looking around.");
+            System.out.println("the bookshelf looks weird, we dont know why. keep looking around.");
             gameMain.location = "bookshelf";
          } else if (inLivingRoom == false && inputLine.contains("bookshelf")){
-            System.out.println("There is no bookshelf in this room.\n");//no bookshelf in room 
+            System.out.println("there is no bookshelf in this room.\n");//no bookshelf in room 
          } else if (inLivingRoom == true && gameMain.getInventory().contains("book") && inputLine.contains("bookshelf")){
-            System.out.println("You've already found the weird looking book, nothing else to see here.");
+            System.out.println("you've already found the weird looking book, nothing else to see here.");
          }
 
+         //pick up book
          if(gameMain.location == "bookshelf"){
             if(inputLine.contains("book") && (inputLine.contains("pick up") || inputLine.contains("look at"))){
                gameMain.inInventory("book"); //put down book?
@@ -151,21 +153,12 @@ public class Main {
             } 
          } 
 
-         
-
-         
-         //using the cipher
-         if(inputLine.contains("use") && inputLine.contains("cipher") && gameMain.inventory.contains("cipher") && gameMain.inventory.contains("book")){
-            System.out.println("You can now read the page in the book. It has two numbers on it: 3 and 1. It also says to look under the couch cushions..."); //cipher to read book
-            gameMain.inInventory("book page");
-         } 
-
          //couch interaction
          if(inLivingRoom == true && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at") || inputLine.contains("go to"))){
             gameMain.location = "couch";
-            System.out.println("You're at the couch");
+            System.out.println("you're at the couch");
           } else if (inLivingRoom == false && inputLine.contains("couch") && (inputLine.contains("approach") || inputLine.contains("look at"))){
-            System.out.println("You can't see a couch here.");
+            System.out.println("you can't see a couch here.");
           }
          
           //lift cushions
@@ -173,35 +166,34 @@ public class Main {
             livingRoom.getCouch().pickUpCushions();
             gameMain.inInventory("box");
          }
-        
    
 
          //box interaction
          if(inLivingRoom == true && livingRoom.getCouch().lifted == true && inputLine.contains("box") && (inputLine.contains("look at") || inputLine.contains("open") || inputLine.contains("unlock"))){
-            livingRoom.getBox().tryToOpen = true; //need to fix scanner issues here, need to take out scanner in box and get this to still work  
+            livingRoom.getBox().tryToOpen = true;   
             while(livingRoom.getBox().tryToOpen){ 
-               if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){
-                  System.out.println("The box requires a 4 digit code. You don't have all the information needed to open it yet, keep looking around.");
+               if(!(livingRoom.getBlueCup().foundCup == true && livingRoom.getGreenCup().foundCup == true)){  //if try to open box w/out all the necessary info
+                  System.out.println("the box requires a 4 digit code. you don't have all the information needed to open it yet, keep looking around.");
                   livingRoom.getBox().tryToOpen = false;
                } else{
-                  System.out.println("Enter the 4 digit code to open the box: (hint, start with the 3)" + "\n");
+                  System.out.println("enter the 4 digit code to open the box: (hint, start with the 3...)" + "\n"); //input code
                   String codeTry = playGame.nextLine();
                      if(codeTry.equals(livingRoom.getBox().boxCode)){
-                        System.out.println("\nYou've opened the box! Inside is a key.");
+                        System.out.println("\nyou've opened the box! inside is a key.");
                         gameMain.inInventory("key to bedroom");
                         livingRoom.getBox().tryToOpen = false;
                         livingRoom.getBox().open = true;
                      } else{
                         Boolean stillTrying = true;
                         while(stillTrying){
-                           System.out.println("\nNot quite right, care to try again? \n");    
+                           System.out.println("\nnot quite right, care to try again? \n");    
                            String endTry = playGame.nextLine().trim();
                            if (endTry.contains("no")){ 
                               livingRoom.getBox().open = true;
-                              System.out.println("Ok, now what will you do? \n"); 
+                              System.out.println("ok, now what will you do? \n"); 
                               stillTrying = false;
                            } else if (endTry.contains(livingRoom.getBox().boxCode)){
-                              System.out.println("\nYou've opened the box! Inside is a key. \n");
+                              System.out.println("\nyou've opened the box! inside is a key. \n");
                               gameMain.inInventory("key to bedroom");
                               livingRoom.getBox().open = true;
                               livingRoom.getBox().tryToOpen = false;
