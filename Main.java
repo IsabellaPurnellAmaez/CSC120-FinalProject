@@ -366,7 +366,7 @@ public class Main {
             
          
 
-         //keys and doors 
+         //keys and doors
          if (inBedroom == true && livingRoom.getBox().open == true && (inputLine.contains("key") && inputLine.contains("pick up"))){
             System.out.println("You have picked up a door key");
             gameMain.inInventory("outside door key");
