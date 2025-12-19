@@ -13,6 +13,7 @@ public class Main {
 
    //valid commands and objects that the user can say
    private static ArrayList<String> commands = new ArrayList<String>();
+   private static ArrayList<String> commandsNO = new ArrayList<String>();
    private static boolean commandRecognized = false;
    private static boolean objectRecognized = false;
 
@@ -57,11 +58,11 @@ public class Main {
       commands.add("look under");
       commands.add("look behind");
       commands.add("flip");
-      commands.add("look around");
-      commands.add("print inventory");
-      commands.add("which room am I in");
-      commands.add("where am I");
-      commands.add("help");
+      commandsNO.add("look around");
+      commandsNO.add("print inventory");
+      commandsNO.add("which room am i in");
+      commandsNO.add("where am i");
+      commandsNO.add("help");
 
       //list of objects in the living room
       livingRoomObjects.add("cup");
@@ -88,6 +89,9 @@ public class Main {
       System.out.println("****************************\nPOSSIBLE COMMANDS:\n****************************");
       for(String commands : commands){
          System.out.println("- " +commands);
+      }
+      for(String commands : commandsNO){
+         System.out.println("- " + commands);
       }
       System.out.println( "****************************\n");
       System.out.println("\nyou are locked inside a room. the room has two doors, the one you entered through and another that\nyou don't know where it leads. both are locked. inside the room with you is a table with three\ndifferent colored cups, a couch, and a bookshelf.");
@@ -422,14 +426,17 @@ public class Main {
 
 
          //room location check
-         if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
+         if((inputLine.contains("where am i") || inputLine.contains("which room am i in")) && (gameMain.location == "table" || gameMain.location == "bookshelf" || gameMain.location == "couch" || gameMain.location == "bedroom door" || gameMain.location == "outside door" || gameMain.location == "nightstand" || gameMain.location == "dresser" || gameMain.location == "bed" || gameMain.location == "mirror")){
                if(inLivingRoom == true){
                System.out.println("you are currently in the living room by the " + gameMain.location);
             } else if (inBedroom == true){
                System.out.println("you are currently in the bedroomby the " + gameMain.location);
             }
-            else{
-               System.out.println("you are not in a room. you've escaped!");
+         } else if(inputLine.contains("where am i") || inputLine.contains("which room am i in")){
+            if(inLivingRoom == true){
+               System.out.println("you are currently in the living room.");
+            } else if (inBedroom == true){
+               System.out.println("you are currently in the bedroom.");
             }
          }
 
@@ -469,6 +476,14 @@ public class Main {
          for(String command : commands){ //converts the list of commands into a string and checks if the inputLine contains any of them
             if(inputLine.contains(command)){
                commandRecognized = true;
+               break;
+            }
+         }
+
+         for(String command : commandsNO){ 
+            if(inputLine.contains(command)){
+               commandRecognized = true;
+               objectRecognized = true;
                break;
             }
          }
